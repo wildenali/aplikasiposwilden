@@ -25,4 +25,14 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 latihan dari [jagoreact.com](jagoreact.com)
 
 # Install react-router-dom
-`npm i --save react-router-dom`
+`$ npm i --save react-router-dom`
+
+# Install Firebase
+- Install Firebase CLI
+`$ npm i -g firebase-tools`
+
+- Login firebase
+`$ firebase login`
+
+- Cek apakah firebase cli sudah terhubung
+`$ firebase projects:list`
