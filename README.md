@@ -23,3 +23,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 # Aplikasi Point of Sales
 latihan dari [jagoreact.com](jagoreact.com)
+
+# Install react-router-dom
+`npm i --save react-router-dom`
