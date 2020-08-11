@@ -36,3 +36,20 @@ latihan dari [jagoreact.com](jagoreact.com)
 
 - Cek apakah firebase cli sudah terhubung
 `$ firebase projects:list`
+
+
+
+
+# Alur Pembuatan App
+1. 01_Routing
+2. 02_Styling - Menggunakan Material UI
+3. 03_Registration_Page
+4. 04_Login_Page
+5. 05_ForgetPassword_Page
+6. 06_NotFound_Page
+7. 07_LayoutPrivate_Page
+8. 08_Setting_Page
+9. 09_Product_Page
+10. 10_HomeTransaction_Page
+11. 11_HistoryTransaction_Page
+12. 12_DeployToFirebase
