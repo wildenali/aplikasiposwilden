@@ -78,3 +78,16 @@ Install Firebase SDK
 
 Install [React Firebase Hooks](https://github.com/CSFrequency/react-firebase-hooks)
 `$ npm i --save react-firebase-hooks`
+
+Gunakan useContext Api, cek di web react nya langsung<br/>
+
+### Testing
+Test Firebase Auth
+- http://localhost:3000/pengaturan
+atau
+- http://localhost:3000/produk
+atau
+- http://localhost:3000/transaksi
+
+Hasilnya akan redirect ke login, karena ada auth dari firebase,<br/>
+dan sampai sini kita belum bikin auth user nya
