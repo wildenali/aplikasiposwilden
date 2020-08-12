@@ -14,6 +14,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/pengaturan" component={Private} />
+        <Route path="/produk" component={Private} />
         <Route path="/login" component={Login} />
         <Route path="/registrasi" component={Registrasi} />
         <Route path="/lupa-password" component={LupaPassword} />
