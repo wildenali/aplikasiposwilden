@@ -1,11 +1,7 @@
 import React from 'react'
 
 function Login() {
-  return (
-    <div>
-      <h1>Halaman Login</h1>
-    </div>
-  )
+  return <h1>Halaman Login</h1>
 }
 
-export default Login
+export default Login;
