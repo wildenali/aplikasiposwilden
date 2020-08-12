@@ -98,3 +98,6 @@ dan sampai sini kita belum bikin auth user nya
 
 ## Add Roboto Font
 Add roboto font on public/index.html
+
+# Install Validator
+`$ npm i --save validator`

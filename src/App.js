@@ -15,7 +15,7 @@ import FirebaseProvider from './components/FirebaseProvider';
 
 // import komponen material-ui
 import CssBaseline from '@material-ui/core/CssBaseline'
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import theme from './config/theme';
 
 function App() {
