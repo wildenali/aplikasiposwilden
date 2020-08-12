@@ -15,25 +15,29 @@ import FirebaseProvider from './components/FirebaseProvider';
 
 // import komponen material-ui
 import CssBaseline from '@material-ui/core/CssBaseline'
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import theme from './config/theme';
 
 function App() {
   return (
     <>
       <CssBaseline />
-      <FirebaseProvider>
-        <Router>
-          <Switch>
-            <PrivateRoute exact path="/" c omponent={Private} />
-            <PrivateRoute path="/pengaturan" component={Private} />
-            <PrivateRoute path="/produk" component={Private} />
-            <PrivateRoute path="/transaksi" component={Private} />
-            <Route path="/login" component={Login} />
-            <Route path="/registrasi" component={Registrasi} />
-            <Route path="/lupa-password" component={LupaPassword} />
-            <Route component={NotFound} />
-          </Switch>
-        </Router>
-      </FirebaseProvider>
+      <MuiThemeProvider theme={theme}>
+        <FirebaseProvider>
+          <Router>
+            <Switch>
+              <PrivateRoute exact path="/" c omponent={Private} />
+              <PrivateRoute path="/pengaturan" component={Private} />
+              <PrivateRoute path="/produk" component={Private} />
+              <PrivateRoute path="/transaksi" component={Private} />
+              <Route path="/login" component={Login} />
+              <Route path="/registrasi" component={Registrasi} />
+              <Route path="/lupa-password" component={LupaPassword} />
+              <Route component={NotFound} />
+            </Switch>
+          </Router>
+        </FirebaseProvider>
+      </MuiThemeProvider>
     </>
   );
 }
