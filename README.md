@@ -53,3 +53,41 @@ latihan dari [jagoreact.com](jagoreact.com)
 10. 10_HomeTransaction_Page
 11. 11_HistoryTransaction_Page
 12. 12_DeployToFirebase
+
+
+# Testing Private Route
+Test 01
+- http://localhost:3000
+- http://localhost:3000/login
+- http://localhost:3000/registrasi
+- http://localhost:3000/alksdfklasdf
+- http://localhost:3000/pengaturan
+- http://localhost:3000/produk
+- http://localhost:3000/transaksi
+
+See the result and you can see the how the private route work<br/><br/>
+
+Kemudian coba const user pada PrivateRoute.js di folder component ubah menjadi<br/>
+const user = { name: 'wilden' } kemudian save dan coba lagi Test 01<br/><br/>
+
+See the result and you can see the how the private route work
+
+# Mengubah data User dummy menjadi data dari Firebase Authetication
+Install Firebase SDK
+`$ npm i --save firebase`
+
+Install [React Firebase Hooks](https://github.com/CSFrequency/react-firebase-hooks)
+`$ npm i --save react-firebase-hooks`
+
+Gunakan useContext Api, cek di web react nya langsung<br/>
+
+### Testing
+Test Firebase Auth
+- http://localhost:3000/pengaturan
+atau
+- http://localhost:3000/produk
+atau
+- http://localhost:3000/transaksi
+
+Hasilnya akan redirect ke login, karena ada auth dari firebase,<br/>
+dan sampai sini kita belum bikin auth user nya

@@ -1,11 +1,7 @@
 import React from 'react'
 
 function Registrasi() {
-  return (
-    <div>
-      <h1>Halaman Registrasi</h1>
-    </div>
-  )
+  return <h1>Halaman Registrasi</h1>
 }
 
-export default Registrasi
+export default Registrasi;
