@@ -53,3 +53,21 @@ latihan dari [jagoreact.com](jagoreact.com)
 10. 10_HomeTransaction_Page
 11. 11_HistoryTransaction_Page
 12. 12_DeployToFirebase
+
+
+# Testing Private Route
+Test 01
+- http://localhost:3000
+- http://localhost:3000/login
+- http://localhost:3000/registrasi
+- http://localhost:3000/alksdfklasdf
+- http://localhost:3000/pengaturan
+- http://localhost:3000/produk
+- http://localhost:3000/transaksi
+
+See the result and you can see the how the private route work<br/><br/>
+
+Kemudian coba const user pada PrivateRoute.js di folder component ubah menjadi<br/>
+const user = { name: 'wilden' } kemudian save dan coba lagi Test 01<br/><br/>
+
+See the result and you can see the how the private route work
