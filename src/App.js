@@ -13,6 +13,7 @@ function App() {
   return (
     <Router>
       <Switch>
+        <Route exact path="/" component={Private} />
         <Route path="/pengaturan" component={Private} />
         <Route path="/produk" component={Private} />
         <Route path="/transaksi" component={Private} />
