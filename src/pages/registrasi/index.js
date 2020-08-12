@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // import komponen material-ui
 import Button from '@material-ui/core/Button'
@@ -16,6 +16,20 @@ import { Link } from 'react-router-dom';
 function Registrasi() {
 
   const classes = useStyles();
+
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+    ulangi_password: '',
+  })
+
+  const handleChange = e => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
+  }
+  console.log(form);
 
   return  <Container maxWidth="xs">
             <Paper className={classes.paper}>
@@ -36,6 +50,8 @@ function Registrasi() {
                   label="Alamat Email"
                   fullWidth
                   required
+                  value={form.email}
+                  onChange={handleChange}
                 />
                 <TextField
                   id="password"
@@ -45,6 +61,8 @@ function Registrasi() {
                   label="Password"
                   fullWidth
                   required
+                  value={form.password}
+                  onChange={handleChange}
                 />
                 <TextField
                   id="ulangi_password"
@@ -54,6 +72,8 @@ function Registrasi() {
                   label="Ulangi Password"
                   fullWidth
                   required
+                  value={form.ulangi_password}
+                  onChange={handleChange}
                 />
                 <Grid container className={classes.buttons}>
                   <Grid item xs>
