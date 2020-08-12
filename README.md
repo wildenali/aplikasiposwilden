@@ -71,3 +71,10 @@ Kemudian coba const user pada PrivateRoute.js di folder component ubah menjadi<b
 const user = { name: 'wilden' } kemudian save dan coba lagi Test 01<br/><br/>
 
 See the result and you can see the how the private route work
+
+# Mengubah data User dummy menjadi data dari Firebase Authetication
+Install Firebase SDK
+`$ npm i --save firebase`
+
+Install [React Firebase Hooks](https://github.com/CSFrequency/react-firebase-hooks)
+`$ npm i --save react-firebase-hooks`
