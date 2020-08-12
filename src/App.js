@@ -13,24 +13,28 @@ import Private from './pages/private';
 import PrivateRoute from './components/PrivateRoute';
 import FirebaseProvider from './components/FirebaseProvider';
 
-
+// import komponen material-ui
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 function App() {
   return (
-    <FirebaseProvider>
-      <Router>
-        <Switch>
-          <PrivateRoute exact path="/" c omponent={Private} />
-          <PrivateRoute path="/pengaturan" component={Private} />
-          <PrivateRoute path="/produk" component={Private} />
-          <PrivateRoute path="/transaksi" component={Private} />
-          <Route path="/login" component={Login} />
-          <Route path="/registrasi" component={Registrasi} />
-          <Route path="/lupa-password" component={LupaPassword} />
-          <Route component={NotFound} />
-        </Switch>
-      </Router>
-    </FirebaseProvider>
+    <>
+      <CssBaseline />
+      <FirebaseProvider>
+        <Router>
+          <Switch>
+            <PrivateRoute exact path="/" c omponent={Private} />
+            <PrivateRoute path="/pengaturan" component={Private} />
+            <PrivateRoute path="/produk" component={Private} />
+            <PrivateRoute path="/transaksi" component={Private} />
+            <Route path="/login" component={Login} />
+            <Route path="/registrasi" component={Registrasi} />
+            <Route path="/lupa-password" component={LupaPassword} />
+            <Route component={NotFound} />
+          </Switch>
+        </Router>
+      </FirebaseProvider>
+    </>
   );
 }
 
