@@ -91,3 +91,10 @@ atau
 
 Hasilnya akan redirect ke login, karena ada auth dari firebase,<br/>
 dan sampai sini kita belum bikin auth user nya
+
+# Install Material UI
+`$ npm i --save @material-ui/core`
+`$ npm i --save @material-ui/styles`
+
+## Add Roboto Font
+Add roboto font on public/index.html
