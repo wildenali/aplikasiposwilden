@@ -101,3 +101,7 @@ Add roboto font on public/index.html
 
 # Install Validator
 `$ npm i --save validator`
+
+# Lupa Password
+Install notisstack<br/>
+`$ npm i --save notistack`
