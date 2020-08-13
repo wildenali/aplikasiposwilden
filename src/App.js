@@ -26,7 +26,7 @@ function App() {
         <FirebaseProvider>
           <Router>
             <Switch>
-              <PrivateRoute exact path="/" c omponent={Private} />
+              <PrivateRoute exact path="/" component={Private} />
               <PrivateRoute path="/pengaturan" component={Private} />
               <PrivateRoute path="/produk" component={Private} />
               <PrivateRoute path="/transaksi" component={Private} />

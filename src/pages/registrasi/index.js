@@ -10,10 +10,13 @@ import Grid from '@material-ui/core/Grid';
 
 // import styles
 import useStyles from './styles';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 // import validator
 import isEmail from 'validator/lib/isEmail';
+
+// firebase hook
+import { useFirebase } from '../../components/FirebaseProvider'
 
 function Registrasi() {
 
@@ -30,6 +33,10 @@ function Registrasi() {
     password: '',
     ulangi_password: '',
   })
+
+  const [isSubmitting, setSubmitting] = useState(false)
+
+  const { auth, user } = useFirebase();
 
   const handleChange = e => {
     setForm({
@@ -66,15 +73,50 @@ function Registrasi() {
     return newError;
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const findErrors = validate();
 
-    if (Object.keys(findErrors).some(err => err !== '')) {
+    if (Object.values(findErrors).some(err => err !== '')) {
       setError(findErrors)
+    } else {
+      try {
+        setSubmitting(true);  // ini untuk ketika di klik tombo dafta, form registrasinya akan diabled
+        await auth.createUserWithEmailAndPassword(form.email, form.password)
+      } catch (error) {
+        // kode error bisa di lihat di https://firebase.google.com/docs/reference/js/firebase.auth.Auth#createuserwithemailandpassword
+        const newError = {};
+
+        switch (e.code) {
+          case 'auth/email-already-in-use':
+            newError.email = 'Email sudah terdaftar';
+            break;
+          case 'auth/invalid-email':
+            newError.email = 'Email tidak valid';
+            break;
+          case 'auth/operation-not-allowed':
+            newError.email = 'Metode Email dan Password tidak didukung';
+            break;
+          case 'auth/weak-password':
+            newError.password = 'Password Lemah';
+            break;
+          default:
+            newError.password = 'Terjadi Kesalahan Silahkan coba lagi';
+            break;
+        }
+
+        setError(newError);
+        setSubmitting(false);
+      }
     }
 
   }
+
+  if (user) {
+    return <Redirect to="/" />
+  }
+
+  console.log(user);
 
   return  <Container maxWidth="xs">
             <Paper className={classes.paper}>
@@ -99,6 +141,7 @@ function Registrasi() {
                   onChange={handleChange}
                   helperText={error.email}
                   error={error.email?true:false}
+                  disabled={isSubmitting}
                 />
                 <TextField
                   id="password"
@@ -112,6 +155,7 @@ function Registrasi() {
                   onChange={handleChange}
                   helperText={error.password}
                   error={error.password?true:false}
+                  disabled={isSubmitting}
                 />
                 <TextField
                   id="ulangi_password"
@@ -125,6 +169,7 @@ function Registrasi() {
                   onChange={handleChange}
                   helperText={error.ulangi_password}
                   error={error.ulangi_password?true:false}
+                  disabled={isSubmitting}
                 />
                 <Grid container className={classes.buttons}>
                   <Grid item xs>
