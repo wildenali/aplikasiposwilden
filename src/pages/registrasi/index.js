@@ -18,6 +18,9 @@ import isEmail from 'validator/lib/isEmail';
 // firebase hook
 import { useFirebase } from '../../components/FirebaseProvider'
 
+// Import AppLoading untuk animasi loading
+import AppLoading from '../../components/AppLoading'
+
 function Registrasi() {
 
   const classes = useStyles();
@@ -36,7 +39,7 @@ function Registrasi() {
 
   const [isSubmitting, setSubmitting] = useState(false)
 
-  const { auth, user } = useFirebase();
+  const { auth, user, loading } = useFirebase();
 
   const handleChange = e => {
     setForm({
@@ -110,6 +113,10 @@ function Registrasi() {
       }
     }
 
+  }
+
+  if (loading) {
+    return <AppLoading />
   }
 
   if (user) {
