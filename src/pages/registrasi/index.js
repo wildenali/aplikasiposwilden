@@ -104,7 +104,7 @@ function Registrasi() {
             newError.password = 'Password Lemah';
             break;
           default:
-            newError.password = 'Terjadi Kesalahan Silahkan coba lagi';
+            newError.email = 'Terjadi Kesalahan Silahkan coba lagi';
             break;
         }
 
