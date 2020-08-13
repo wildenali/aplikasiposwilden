@@ -21,7 +21,9 @@ import { useFirebase } from '../../components/FirebaseProvider'
 // Import AppLoading untuk animasi loading
 import AppLoading from '../../components/AppLoading'
 
-function Login() {
+function Login(props) {
+
+  const { location } = props;
 
   const classes = useStyles();
 
@@ -112,7 +114,8 @@ function Login() {
   }
 
   if (user) {
-    return <Redirect to="/" />
+    const redirectTo = location.state && location.state.from && location.state.from.pathname ? location.state.from.pathname : '/';
+    return <Redirect to={redirectTo} />
   }
 
   console.log(user);
