@@ -92,26 +92,26 @@ export default function Dashboard() {
         </div>
         <Divider />
           <List>
-            <Route path="/" exact children={({match})=>{
-              return  <ListItem button selected={match? true:false}>
+            <Route path="/" exact children={({match, history})=>{
+              return  <ListItem button selected={match? true:false} onClick={()=>{history.push('/')}}>
                         <ListItemIcon><HomeIcon /></ListItemIcon>
                         <ListItemText primary="Home" />
                       </ListItem>
             }} />
-            <Route path="/produk" children={({match})=>{
-              return  <ListItem button selected={match? true:false}>
+            <Route path="/produk" children={({match, history})=>{
+              return  <ListItem button selected={match? true:false} onClick={()=>{history.push('/produk')}}>
                         <ListItemIcon><StoreIcon /></ListItemIcon>
                         <ListItemText primary="Produk" />
                       </ListItem>
             }} />
-            <Route path="/transaksi" children={({match})=>{
-              return  <ListItem button selected={match? true:false}>
+            <Route path="/transaksi" children={({match, history})=>{
+              return  <ListItem button selected={match? true:false} onClick={()=>{history.push('/transaksi')}}>
                         <ListItemIcon><ShoppingCartIcon /></ListItemIcon>
                         <ListItemText primary="Transaksi" />
                       </ListItem>
             }} />
-            <Route path="/pengaturan" children={({match})=>{
-              return  <ListItem button selected={match? true:false}>
+            <Route path="/pengaturan" children={({match, history})=>{
+              return  <ListItem button selected={match? true:false} onClick={()=>{history.push('/pengaturan')}}>
                         <ListItemIcon><SettingsIcon /></ListItemIcon>
                         <ListItemText primary="Pengaturan" />
                       </ListItem>
