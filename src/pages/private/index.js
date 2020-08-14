@@ -102,11 +102,11 @@ export default function Dashboard() {
             </ListItem>
             <ListItem button>
               <ListItemIcon><ShoppingCartIcon /></ListItemIcon>
-              <ListItemText primary="Produk" />
+              <ListItemText primary="Transaksi" />
             </ListItem>
             <ListItem button>
               <ListItemIcon><SettingsIcon /></ListItemIcon>
-              <ListItemText primary="Produk" />
+              <ListItemText primary="Pengaturan" />
             </ListItem>
           </List>
         {/* <List>{secondaryListItems}</List> */}
