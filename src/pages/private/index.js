@@ -27,16 +27,26 @@ import Home from './home'
 // import styles
 import useStyles from './styles'
 
+// firebase hook untuk memanggil fungsi signout
+import {useFirebase} from '../../components/FirebaseProvider'
+
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const { auth } = useFirebase();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  const handleSignOut = (e) => {
+    // di kkonfirmasi dulu, mau signout atau tidak
+    if (window.confirm('Apakah anda yakin ingin keluar dari aplikasi?')) {
+      auth.signOut();
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -56,7 +66,7 @@ export default function Dashboard() {
             Dashboard
           </Typography>
           <IconButton color="inherit">
-            <SignOutIcon />
+            <SignOutIcon onClick={handleSignOut} />
           </IconButton>
         </Toolbar>
       </AppBar>
