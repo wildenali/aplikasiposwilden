@@ -92,24 +92,31 @@ export default function Dashboard() {
         </div>
         <Divider />
           <List>
-            <ListItem button>
-              <ListItemIcon><HomeIcon /></ListItemIcon>
-              <ListItemText primary="Home" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon><StoreIcon /></ListItemIcon>
-              <ListItemText primary="Produk" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon><ShoppingCartIcon /></ListItemIcon>
-              <ListItemText primary="Transaksi" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon><SettingsIcon /></ListItemIcon>
-              <ListItemText primary="Pengaturan" />
-            </ListItem>
+            <Route path="/" exact children={({match})=>{
+              return  <ListItem button selected={match? true:false}>
+                        <ListItemIcon><HomeIcon /></ListItemIcon>
+                        <ListItemText primary="Home" />
+                      </ListItem>
+            }} />
+            <Route path="/produk" children={({match})=>{
+              return  <ListItem button selected={match? true:false}>
+                        <ListItemIcon><StoreIcon /></ListItemIcon>
+                        <ListItemText primary="Produk" />
+                      </ListItem>
+            }} />
+            <Route path="/transaksi" children={({match})=>{
+              return  <ListItem button selected={match? true:false}>
+                        <ListItemIcon><ShoppingCartIcon /></ListItemIcon>
+                        <ListItemText primary="Transaksi" />
+                      </ListItem>
+            }} />
+            <Route path="/pengaturan" children={({match})=>{
+              return  <ListItem button selected={match? true:false}>
+                        <ListItemIcon><SettingsIcon /></ListItemIcon>
+                        <ListItemText primary="Pengaturan" />
+                      </ListItem>
+            }} />
           </List>
-        {/* <List>{secondaryListItems}</List> */}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
