@@ -105,3 +105,11 @@ Add roboto font on public/index.html
 # Lupa Password
 Install notisstack<br/>
 `$ npm i --save notistack`
+
+# Page Layout Examples
+[Free Template from Material-ui](https://material-ui.com/getting-started/templates/)
+<br/>
+
+yg di pakai
+[Dashboard Layout](https://material-ui.com/getting-started/templates/dashboard/)
+
