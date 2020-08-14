@@ -13,7 +13,7 @@ import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import SignOutIcon from '@material-ui/icons/ExitToApp';
 
 // Import react-router-dom untuk Switch dan Route
 import { Switch, Route } from 'react-router-dom'
@@ -56,9 +56,7 @@ export default function Dashboard() {
             Dashboard
           </Typography>
           <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
+            <SignOutIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
