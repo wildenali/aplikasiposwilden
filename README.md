@@ -113,3 +113,5 @@ Install notisstack<br/>
 yg di pakai
 [Dashboard Layout](https://material-ui.com/getting-started/templates/dashboard/)
 
+## Install MaterialUI Icons
+`$ npm i --save @material-ui/icons`
