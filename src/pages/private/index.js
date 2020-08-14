@@ -71,7 +71,12 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+            <Switch>
+              <Route path="/produk" children="Produk"/>
+              <Route path="/transaksi" children="Transaksi"/>
+              <Route path="/pengaturan" children="Pengaturan"/>
+              <Route children="Home"/>
+            </Switch>
           </Typography>
           <IconButton color="inherit">
             <SignOutIcon onClick={handleSignOut} />
