@@ -6,10 +6,12 @@ import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -29,6 +31,12 @@ import useStyles from './styles'
 
 // firebase hook untuk memanggil fungsi signout
 import {useFirebase} from '../../components/FirebaseProvider'
+
+// import Icon icon
+import HomeIcon from '@material-ui/icons/Home';
+import StoreIcon from '@material-ui/icons/Store';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 export default function Dashboard() {
   const classes = useStyles();
@@ -83,8 +91,24 @@ export default function Dashboard() {
           </IconButton>
         </div>
         <Divider />
-        {/* <List>{mainListItems}</List> */}
-        <Divider />
+          <List>
+            <ListItem button>
+              <ListItemIcon><HomeIcon /></ListItemIcon>
+              <ListItemText primary="Home" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon><StoreIcon /></ListItemIcon>
+              <ListItemText primary="Produk" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon><ShoppingCartIcon /></ListItemIcon>
+              <ListItemText primary="Produk" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon><SettingsIcon /></ListItemIcon>
+              <ListItemText primary="Produk" />
+            </ListItem>
+          </List>
         {/* <List>{secondaryListItems}</List> */}
       </Drawer>
       <main className={classes.content}>
