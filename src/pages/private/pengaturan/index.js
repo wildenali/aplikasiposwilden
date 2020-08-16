@@ -13,7 +13,11 @@ import Toko from './toko';
 
 function Pengaturan(props) {
 
-  const {location} = props;
+  const {location, history} = props;
+
+  const handleChangeTab = (event, value) => {
+    history.push(value)
+  }
 
   return (
     <Paper>
@@ -21,6 +25,7 @@ function Pengaturan(props) {
         value={location.pathname}
         indicatorColor="primary"
         textColor="primary"
+        onChange={handleChangeTab}
       >
         <Tab label="Pengguna" value='/pengaturan/pengguna' />
         <Tab label="Toko" value='/pengaturan/toko' />
