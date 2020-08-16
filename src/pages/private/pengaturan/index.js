@@ -11,12 +11,15 @@ import Pengguna from './pengguna';
 import Toko from './toko';
 
 
-function Pengaturan() {
+function Pengaturan(props) {
+
+  const {location} = props;
+
   return (
     <Paper>
-      <Tabs>
+      <Tabs value={location.pathname}>
         <Tab label="Pengguna" value='/pengaturan/pengguna' />
-        <Tab label="Toko" value='pengaturan/toko' />
+        <Tab label="Toko" value='/pengaturan/toko' />
       </Tabs>
       <Switch>
         <Route path="/pengaturan/pengguna" component={Pengguna} />
