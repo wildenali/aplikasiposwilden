@@ -17,7 +17,11 @@ function Pengaturan(props) {
 
   return (
     <Paper>
-      <Tabs value={location.pathname}>
+      <Tabs 
+        value={location.pathname}
+        indicatorColor="primary"
+        textColor="primary"
+      >
         <Tab label="Pengguna" value='/pengaturan/pengguna' />
         <Tab label="Toko" value='/pengaturan/toko' />
       </Tabs>
