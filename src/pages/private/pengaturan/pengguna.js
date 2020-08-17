@@ -9,8 +9,11 @@ import { useSnackbar } from 'notistack';
 // validator email
 import isEmail from 'validator/lib/isEmail';
 
-function Pengguna() {
+// import styles
+import useStyles from './styles/pengguna';
 
+function Pengguna() {
+  const classes = useStyles();
   const { user } = useFirebase();
   const [error, setError] = useState({
     displayName: ''
@@ -87,11 +90,12 @@ function Pengguna() {
     }
   }
 
-  return  <>
+  return  <div className={classes.pengaturanPengguna}>
             <TextField
               id="displayName"
               name="displayName"
               label="Name"
+              margin="normal"
               defaultValue={user.displayName}
               inputProps={{
                 ref: displayNameRef,
@@ -105,6 +109,7 @@ function Pengguna() {
               id="email"
               name="email"
               label="Email"
+              margin="normal"
               defaultValue={user.email}
               inputProps={{
                 ref: emailRef,
@@ -114,7 +119,7 @@ function Pengguna() {
               helperText={error.email}
               error={error.email ? true : false}
             />
-          </>
+          </div>
 }
 
 export default Pengguna;
