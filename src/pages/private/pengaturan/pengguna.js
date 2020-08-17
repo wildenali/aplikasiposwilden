@@ -25,6 +25,9 @@ function Pengguna() {
         displayName: 'Nama Wajib disini'
       })
     } else if (displayName !== user.displayName) {
+      setError({
+        displayName: ''
+      })
       setSubmitting(true)
       await user.updateProfile({
         displayName
