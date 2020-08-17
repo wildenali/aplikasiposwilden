@@ -22,7 +22,7 @@ function Pengguna() {
       setError({
         displayName: 'Nama Wajib disini'
       })
-    } else {
+    } else if (displayName !== user.displayName) {
       setSubmitting(true)
       await user.updateProfile({
         displayName
