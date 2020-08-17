@@ -12,6 +12,10 @@ import isEmail from 'validator/lib/isEmail';
 // import styles
 import useStyles from './styles/pengguna';
 
+// import Button dan Typography
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+
 function Pengguna() {
   const classes = useStyles();
   const { user } = useFirebase();
@@ -90,6 +94,17 @@ function Pengguna() {
     }
   }
 
+  const sendEmailVerification = async (e) => {
+    const actionCodeSettings = {
+      url: `${window.location.origin}/login`
+    }
+
+    setSubmitting(true);
+    await user.sendEmailVerification(actionCodeSettings);
+    enqueueSnackbar(`Email verifikasi telah dikirim ke ${emailRef.current.value}`, {variant: 'success'});
+    setSubmitting(false);
+  }
+
   return  <div className={classes.pengaturanPengguna}>
             <TextField
               id="displayName"
@@ -119,7 +134,21 @@ function Pengguna() {
               helperText={error.email}
               error={error.email ? true : false}
             />
+
+            {
+              user.emailVerified?
+              <Typography color="primary" variant="subtitle1">Email Sudah Tervirifikasi</Typography>
+              :
+              <Button
+                variant="outlined"
+                onClick={sendEmailVerification}
+                disabled={isSubmitting}
+              >
+                Kirim Email Verifikasi
+              </Button>
+            }
           </div>
 }
 
 export default Pengguna;
+ 
