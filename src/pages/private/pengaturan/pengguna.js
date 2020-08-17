@@ -8,6 +8,9 @@ import { useFirebase } from '../../../components/FirebaseProvider'
 function Pengguna() {
 
   const { user } = useFirebase();
+  const [error, setError] = useState({
+    displayName: ''
+  })
   const [isSubmitting, setSubmitting] = useState(false)
   const displayNameRef = useRef()
 
@@ -15,11 +18,18 @@ function Pengguna() {
     const displayName = displayNameRef.current.value;
     console.log(displayName);
 
-    setSubmitting(true)
-    await user.updateProfile({
-      displayName
-    })
-    setSubmitting(false)
+    if(!displayName) {
+      setError({
+        displayName: 'Nama Wajib disini'
+      })
+    } else {
+      setSubmitting(true)
+      await user.updateProfile({
+        displayName
+      })
+      setSubmitting(false)
+    }
+
 
   }
 
@@ -34,6 +44,8 @@ function Pengguna() {
                 onBlur: saveDisplayName
               }}
               disabled={isSubmitting}
+              helperText={error.displayName}
+              error={error.displayName ? true : false}
             />
           </>
 }
