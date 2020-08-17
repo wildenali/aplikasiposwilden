@@ -20,12 +20,15 @@ function Pengguna() {
   const classes = useStyles();
   const { user } = useFirebase();
   const [error, setError] = useState({
-    displayName: ''
+    displayName: '',
+    email: '',
+    password: ''
   })
   const { enqueueSnackbar } = useSnackbar();
   const [isSubmitting, setSubmitting] = useState(false)
   const displayNameRef = useRef()
   const emailRef = useRef()
+  const passwordRef = useRef()
 
   const saveDisplayName = async (e) => {
     const displayName = displayNameRef.current.value;
@@ -105,6 +108,41 @@ function Pengguna() {
     setSubmitting(false);
   }
 
+  // https://firebase.google.com/docs/reference/js/firebase.User#updatepassword
+  const updatePassword = async (e) => {
+    const password = passwordRef.current.value;
+
+    if (!password) {
+      setError({
+        password: 'Password wajib diisi'
+      })
+    } else {
+      setSubmitting(true)
+      try {
+        await user.updatePassword(password)
+
+        enqueueSnackbar('Password berhasil diperbarui', {variant: 'success'})
+      } catch (e) {
+        let errorPassword = '';
+        switch (e.code) {
+          case 'auth/weak-password':
+            errorPassword = 'password lemah coy'
+            break;
+          case 'auth/requires-recent-login':
+            errorPassword = 'Silahkan logout, kemudian login kembali untuk memperbarui password coy'
+            break;
+          default:
+            errorPassword = 'Terjadi kesalahan silahkan coba lagi'
+            break;
+        }
+        setError({
+          password: errorPassword
+        })
+      }
+      setSubmitting(false)
+    }
+  }
+
   return  <div className={classes.pengaturanPengguna}>
             <TextField
               id="displayName"
@@ -125,6 +163,7 @@ function Pengguna() {
               name="email"
               label="Email"
               margin="normal"
+              type="email"
               defaultValue={user.email}
               inputProps={{
                 ref: emailRef,
@@ -147,6 +186,22 @@ function Pengguna() {
                 Kirim Email Verifikasi
               </Button>
             }
+
+            <TextField
+              id="password"
+              name="password"
+              label="Password Baru"
+              type="password"
+              margin="normal"
+              inputProps={{
+                ref: passwordRef,
+                onBlur: updatePassword
+              }}
+              autoComplete="new-password"
+              disabled={isSubmitting}
+              helperText={error.password}
+              error={error.password ? true : false}
+            />
           </div>
 }
 
