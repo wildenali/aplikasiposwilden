@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 
 import { useFirebase } from '../../../components/FirebaseProvider'
+import { useSnackbar } from 'notistack';
 
 function Pengguna() {
 
@@ -11,6 +12,7 @@ function Pengguna() {
   const [error, setError] = useState({
     displayName: ''
   })
+  const { enqueueSnackbar } = useSnackbar();
   const [isSubmitting, setSubmitting] = useState(false)
   const displayNameRef = useRef()
 
@@ -27,6 +29,7 @@ function Pengguna() {
       await user.updateProfile({
         displayName
       })
+      enqueueSnackbar('Data Pengguna berhasil diperbaharui', {variant: 'success'})
       setSubmitting(false)
     }
 
