@@ -5,6 +5,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import useStyles from './styles/toko'
 
+// validator
+import isURL from 'validator/lib/isURL';
+
 function Toko() {
 
   const classes = useStyles();
@@ -31,13 +34,41 @@ function Toko() {
     })
   }
 
+
+  const validate = () => {
+    const newError = {...error};
+
+    if (!form.nama) {
+      newError.nama = 'Nama wajib diisi'
+    }
+
+    if (!form.alamat) {
+      newError.alamat = 'Alamat wajib diisi'
+    }
+    
+    if (!form.telepon) {
+      newError.telepon = 'Telepon wajib diisi'
+    }
+    
+    if (!form.website) {
+      newError.website = 'Website wajib diisi'
+    } else if (!isURL(form.website)) {
+      newError.website = 'Website tidak valid'
+    }
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+  }
+
   return  <div className={classes.pengaturanToko}>
-            <form>
+            <form onSubmit={handleSubmit}>
               <TextField
                 id="nama"
                 name="nama"
                 label="Nama Toko"
                 margin="normal"
+                required
                 fullWidth
                 value={form.nama}
                 onChange={handleChange}
@@ -50,6 +81,7 @@ function Toko() {
                 name="alamat"
                 label="Alamat Toko"
                 margin="normal"
+                required
                 fullWidth
                 value={form.alamat}
                 onChange={handleChange}
@@ -62,6 +94,7 @@ function Toko() {
                 name="telepon"
                 label="No Telepon Toko"
                 margin="normal"
+                required
                 fullWidth
                 value={form.telepon}
                 onChange={handleChange}
@@ -74,6 +107,7 @@ function Toko() {
                 name="website"
                 label="Website Toko"
                 margin="normal"
+                required
                 fullWidth
                 value={form.website}
                 onChange={handleChange}
@@ -81,6 +115,16 @@ function Toko() {
                 helperText={error.website}
                 disabled={isSubmitting}
               />
+
+              <Button
+                type="submit"
+                className={classes.actionButton}
+                variant="contained"
+                color="primary"
+                disabled={isSubmitting}
+              >
+                Simpan
+              </Button>
             </form>
           </div>
 }
