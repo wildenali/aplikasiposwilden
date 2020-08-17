@@ -3,8 +3,11 @@ import React, { useState } from 'react'
 // material-ui
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import useStyles from './styles/toko'
 
 function Toko() {
+
+  const classes = useStyles();
 
   const [form, setForm] = useState({
     nama: '',
@@ -28,13 +31,14 @@ function Toko() {
     })
   }
 
-  return  <>
+  return  <div className={classes.pengaturanToko}>
             <form>
               <TextField
                 id="nama"
                 name="nama"
                 label="Nama Toko"
                 margin="normal"
+                fullWidth
                 value={form.nama}
                 onChange={handleChange}
                 error={error.nama ? true : false}
@@ -46,6 +50,7 @@ function Toko() {
                 name="alamat"
                 label="Alamat Toko"
                 margin="normal"
+                fullWidth
                 value={form.alamat}
                 onChange={handleChange}
                 error={error.alamat ? true : false}
@@ -57,6 +62,7 @@ function Toko() {
                 name="telepon"
                 label="No Telepon Toko"
                 margin="normal"
+                fullWidth
                 value={form.telepon}
                 onChange={handleChange}
                 error={error.telepon ? true : false}
@@ -68,6 +74,7 @@ function Toko() {
                 name="website"
                 label="Website Toko"
                 margin="normal"
+                fullWidth
                 value={form.website}
                 onChange={handleChange}
                 error={error.website ? true : false}
@@ -75,7 +82,7 @@ function Toko() {
                 disabled={isSubmitting}
               />
             </form>
-          </>
+          </div>
 }
 
 export default Toko;
