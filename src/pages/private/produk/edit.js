@@ -300,7 +300,7 @@ function EditProduk({ match }) {
               <Grid item xs={12}>
                 <div className={classes.actionButton}>
                   <Button
-                    disabled={isSubmitting || isSomethingChange}
+                    disabled={isSubmitting || !isSomethingChange}
                     form="produk-form"
                     type="submit"
                     color="primary"
