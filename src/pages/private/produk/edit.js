@@ -222,7 +222,7 @@ function EditProduk({ match }) {
                     </Button>
                   </label>
                   {
-                    error.foto && <Typography variant="error">
+                    error.foto && <Typography color="error">
                                     {error.foto}
                                   </Typography>
                   }
