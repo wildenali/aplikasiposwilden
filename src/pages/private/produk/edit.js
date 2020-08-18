@@ -42,9 +42,9 @@ function EditProduk({ match }) {
 
   useEffect(() => {
     if (snapshot) {
-      setForm({
-        ...form, ...snapshot.data()
-      });
+      setForm(currrentForm => ({
+        ...currrentForm, ...snapshot.data()
+      }));
     }
   }, [snapshot])
 
