@@ -103,6 +103,16 @@ function EditProduk({ match }) {
     return <AppPageLoading />
   }
 
+  const handleUploadFile = (e) => {
+    const file = e.target.files[0]
+
+    if (file.type !== 'image/png' || file.type !== 'image/jpeg') {
+      setError(error => ({
+        ...error, foto: `Tipe file tidak didukung: ${file.type}`
+      }))
+    }
+  }
+
   return  <div>
             <Typography
               variant="h5"
@@ -197,6 +207,7 @@ function EditProduk({ match }) {
                     type="file"
                     id="upload-foto-produk"
                     accept="image/jpeg,image/png"
+                    onChange={handleUploadFile}
                   />
                   <label htmlFor="upload-foto-produk">
                     <Button
