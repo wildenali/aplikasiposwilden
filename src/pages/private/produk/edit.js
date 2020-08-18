@@ -16,6 +16,8 @@ import { useSnackbar } from 'notistack'
 
 import useStyles from './styles/edit'
 
+import { Prompt } from 'react-router-dom'
+
 function EditProduk({ match }) {
 
   const classes = useStyles()
@@ -47,6 +49,8 @@ function EditProduk({ match }) {
   })
 
   const [isSubmitting, setSubmitting] = useState(false)
+  
+  const [isSomethingChange, setSomethingChange] = useState(false)
 
   useEffect(() => {
     if (snapshot) {
@@ -64,6 +68,8 @@ function EditProduk({ match }) {
     setError({
       ...error, [e.target.name]: ''
     })
+
+    setSomethingChange(true)
   }
 
   const validate = () => {
@@ -96,6 +102,7 @@ function EditProduk({ match }) {
       try {
         await produkDoc.set(form,{merge: true})
         enqueueSnackbar('Data produk berhasil disimpan', {variant:'success'})
+        setSomethingChange(false)
       } catch (e) {
         enqueueSnackbar(e.message, {variant: 'error'})
       }
@@ -154,6 +161,8 @@ function EditProduk({ match }) {
             ...currentForm,
             foto: fotoUrl
           }))
+
+          setSomethingChange(true)
         } catch (e) {
           setError(error => ({
             ...error,
@@ -291,7 +300,7 @@ function EditProduk({ match }) {
               <Grid item xs={12}>
                 <div className={classes.actionButton}>
                   <Button
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || isSomethingChange}
                     form="produk-form"
                     type="submit"
                     color="primary"
@@ -303,6 +312,10 @@ function EditProduk({ match }) {
                 </div>
               </Grid>
             </Grid>
+            <Prompt
+              when={isSomethingChange}
+              message="Terdapat perubahan yang belum disimpan, apakah anda yakin ingin meninggalkan halaman ini?"
+            />
           </div>
 }
 
