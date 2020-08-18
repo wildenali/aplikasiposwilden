@@ -35,6 +35,8 @@ function EditProduk({ match }) {
     deskripsi: '',
   })
 
+  const [isSubmitting, setSubmitting] = useState(false)
+
   useEffect(() => {
     if (snapshot) {
       setForm({
@@ -79,7 +81,13 @@ function EditProduk({ match }) {
     if (Object.values(findErrors).some(err => err !== '')) {
       setError(findErrors)
     } else {
-      await produkDoc.set(form,{merge: true})
+      setSubmitting(true)
+      try {
+        await produkDoc.set(form,{merge: true})
+      } catch (e) {
+        
+      }
+      setSubmitting(false)
     }
   }
 
@@ -116,6 +124,7 @@ function EditProduk({ match }) {
                     onChange={handleChange}
                     helperText={error.nama}
                     error={error.nama ? true : false}
+                    disabled={isSubmitting}
                   />
                   <TextField
                     id="sku"
@@ -127,6 +136,7 @@ function EditProduk({ match }) {
                     onChange={handleChange}
                     helperText={error.sku}
                     error={error.sku ? true : false}
+                    disabled={isSubmitting}
                   />
                   <TextField
                     id="harga"
@@ -140,6 +150,7 @@ function EditProduk({ match }) {
                     onChange={handleChange}
                     helperText={error.harga}
                     error={error.harga ? true : false}
+                    disabled={isSubmitting}
                   />
                   <TextField
                     id="stok"
@@ -153,6 +164,7 @@ function EditProduk({ match }) {
                     onChange={handleChange}
                     helperText={error.stok}
                     error={error.stok ? true : false}
+                    disabled={isSubmitting}
                   />
                   <TextField
                     id="deskripsi"
@@ -166,6 +178,7 @@ function EditProduk({ match }) {
                     onChange={handleChange}
                     helperText={error.deskripsi}
                     error={error.deskripsi ? true : false}
+                    disabled={isSubmitting}
                   />
                 </form>
               </Grid>
@@ -174,6 +187,7 @@ function EditProduk({ match }) {
               </Grid>
               <Grid item xs={12}>
                 <Button
+                  disabled={isSubmitting}
                   form="produk-form"
                   type="submit"
                   color="primary"
