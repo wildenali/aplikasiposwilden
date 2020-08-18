@@ -33,8 +33,11 @@ function AddDialog() {
                 label="Nama Produk"
                 value={nama}
                 onChange={(e) => {
+                  setError('')
                   setNama(e.target.value);
                 }}
+                helperText = {error}
+                error={error ? true : false}
               />
             </DialogContent>
             <DialogActions>
