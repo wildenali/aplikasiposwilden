@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
+import UploadIcon from '@material-ui/icons/CloudUpload'
 
 import { useFirebase } from '../../../components/FirebaseProvider'
 import { useDocument } from 'react-firebase-hooks/firestore'
@@ -18,11 +19,13 @@ function EditProduk({ match }) {
 
   const classes = useStyles()
 
-  const { firestore, user } = useFirebase()
+  const { firestore, storage, user } = useFirebase()
 
   const { enqueueSnackbar } = useSnackbar()
 
   const produkDoc = firestore.doc(`toko/${user.uid}/produk/${match.params.produkId}`)
+  
+  const produkStorageRef = storage.ref(`toko/${user.uid}/produk`)
 
   const [snapshot, loading] = useDocument(produkDoc)
 
@@ -103,10 +106,10 @@ function EditProduk({ match }) {
     return <AppPageLoading />
   }
 
-  const handleUploadFile = (e) => {
+  const handleUploadFile = async (e) => {
     const file = e.target.files[0]
 
-    if (file.type !== 'image/png' || file.type !== 'image/jpeg') {
+    if (!['image/png','image/jpeg'].includes(file.type)) {
       setError(error => ({
         ...error, foto: `Tipe file tidak didukung: ${file.type}`
       }))
@@ -114,6 +117,53 @@ function EditProduk({ match }) {
       setError(error => ({
         ...error, foto: `Ukuran file terlalu besar, maksimal 500KB`
       }))
+    } else {
+      const reader = new FileReader()
+
+      reader.onabort = () => {
+        setError(error => ({
+          ...error,
+          foto: `Proses pembacaan file dibatalkan`
+        }))
+      }
+      
+      reader.onerror = () => {
+        setError(error => ({
+          ...error,
+          foto: `File tidak bisa dibaca`
+        }))
+      }
+      
+      reader.onload = async () => {
+        setError(error => ({
+          ...error,
+          foto: ''
+        }))
+        setSubmitting(true)
+        try {
+          const fotoExt = file.name.substring(file.name.lastIndexOf('.')) // biar bisa mengekstaks ekstension
+
+          const fotoRef = produkStorageRef.child(`${match.params.produkId}${fotoExt}`)
+
+          const fotoSnapshot = await fotoRef.putString(reader.result, 'data_url')
+
+          const fotoUrl = await fotoSnapshot.ref.getDownloadURL()
+
+          setForm(currentForm => ({
+            ...currentForm,
+            foto: fotoUrl
+          }))
+        } catch (e) {
+          setError(error => ({
+            ...error,
+            foto: e.message
+          }))
+        }
+        setSubmitting(false)
+      }
+
+      reader.readAsDataURL(file)
+
     }
   }
 
@@ -206,6 +256,13 @@ function EditProduk({ match }) {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <div className={classes.uploadFotoProduk}>
+                  {
+                    form.foto &&  <img
+                                    src={form.foto}
+                                    className={classes.previewFotoProduk}
+                                    alt={`Foto Produk ${form.nama}`}
+                                  />
+                  }
                   <input
                     className={classes.hideInputFile}
                     type="file"
@@ -215,10 +272,12 @@ function EditProduk({ match }) {
                   />
                   <label htmlFor="upload-foto-produk">
                     <Button
+                      disabled={isSubmitting}
                       variant="outlined"
                       component="span"
                     >
-                      Upload Foto Produk
+                      Upload Foto
+                      <UploadIcon className={classes.iconRight}/>
                     </Button>
                   </label>
                   {
