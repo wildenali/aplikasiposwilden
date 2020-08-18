@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // material ui
 import TextField from '@material-ui/core/TextField'
@@ -6,7 +6,18 @@ import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
-function EditProduk() {
+import { useFirebase } from '../../../components/FirebaseProvider'
+import { useDocument } from 'react-firebase-hooks/firestore'
+
+import AppPageLoading from '../../../components/AppPageLoading'
+
+function EditProduk({ match }) {
+
+  const {firestore, user} = useFirebase()
+
+  const produkDoc = firestore.doc(`toko/${user.uid}/produk/${match.params.produkId}`)
+
+  const [snapshot, loading] = useDocument(produkDoc)
 
   const [form, setForm] = useState({
     nama: '',
@@ -24,10 +35,22 @@ function EditProduk() {
     deskripsi: '',
   })
 
+  useEffect(() => {
+    if (snapshot) {
+      setForm({
+        ...form, ...snapshot.data()
+      });
+    }
+  }, [snapshot])
+
   const handleChange = e => {
     setForm({
       ...form, [e.target.nama]: e.target.value
     })
+  }
+
+  if (loading) {
+    return <AppPageLoading />
   }
 
   return  <div>
