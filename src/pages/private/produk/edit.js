@@ -108,6 +108,14 @@ function EditProduk() {
               <Grid item xs={12} sm={6}>
                 <Typography>Upload Gambar</Typography>
               </Grid>
+              <Grid item xs={12}>
+                <Button
+                  color="primary"
+                  variant="contained"
+                >
+                  Simpan
+                </Button>
+              </Grid>
             </Grid>
           </div>
 }
