@@ -13,7 +13,7 @@ import AppPageLoading from '../../../components/AppPageLoading'
 
 function EditProduk({ match }) {
 
-  const {firestore, user} = useFirebase()
+  const { firestore, user } = useFirebase()
 
   const produkDoc = firestore.doc(`toko/${user.uid}/produk/${match.params.produkId}`)
 
@@ -45,8 +45,42 @@ function EditProduk({ match }) {
 
   const handleChange = e => {
     setForm({
-      ...form, [e.target.nama]: e.target.value
+      ...form, [e.target.name]: e.target.value
     })
+
+    setError({
+      ...error, [e.target.name]: ''
+    })
+  }
+
+  const validate = () => {
+    const newError = {...error}
+
+    if (!form.nama) {
+      newError.nama = "Nama Produk Wajib diisi"
+    }
+    
+    if (!form.harga) {
+      newError.harga = "Harga Produk Wajib diisi"
+    }
+
+    if (!form.stok) {
+      newError.stok = "Stok Produk Wajib diisi"
+    }
+
+    return newError
+  }
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+
+    const findErrors = validate();
+
+    if (Object.values(findErrors).some(err => err !== '')) {
+      setError(findErrors)
+    } else {
+      await produkDoc.set(form,{merge: true})
+    }
   }
 
   if (loading) {
@@ -66,13 +100,18 @@ function EditProduk({ match }) {
               justify="center"
             >
               <Grid item xs={12} sm={6}>
-                <form>
+                <form
+                  id="produk-form"
+                  onSubmit={handleSubmit}
+                  noValidate
+                >
                   <TextField
                     id="nama"
                     name="nama"
                     label="Nama Produk"
                     margin="normal"
                     fullWidth
+                    required
                     value={form.nama}
                     onChange={handleChange}
                     helperText={error.nama}
@@ -95,6 +134,7 @@ function EditProduk({ match }) {
                     label="Harga Produk"
                     type="number"
                     margin="normal"
+                    required
                     fullWidth
                     value={form.harga}
                     onChange={handleChange}
@@ -107,6 +147,7 @@ function EditProduk({ match }) {
                     label="Stok Produk"
                     type="number"
                     margin="normal"
+                    required
                     fullWidth
                     value={form.stok}
                     onChange={handleChange}
@@ -133,6 +174,8 @@ function EditProduk({ match }) {
               </Grid>
               <Grid item xs={12}>
                 <Button
+                  form="produk-form"
+                  type="submit"
                   color="primary"
                   variant="contained"
                 >
