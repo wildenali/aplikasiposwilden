@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // material-ui
 import TextField from '@material-ui/core/TextField';
@@ -10,11 +10,15 @@ import isURL from 'validator/lib/isURL';
 import { useFirebase } from '../../../components/FirebaseProvider';
 import { useSnackbar } from 'notistack';
 
+// https://github.com/CSFrequency/react-firebase-hooks/tree/master/firestore#usedocument
+import {useDocument} from 'react-firebase-hooks/firestore'
+
 function Toko() {
 
   const classes = useStyles();
   const { firestore, user } = useFirebase();
   const tokoDoc = firestore.doc(`toko/${user.uid}`);
+  const [snapshot, loading] = useDocument(tokoDoc);   //https://github.com/CSFrequency/react-firebase-hooks/tree/master/firestore#usedocument
   const {enqueueSnackbar} = useSnackbar();
 
   const [form, setForm] = useState({
@@ -33,6 +37,12 @@ function Toko() {
   
   const [isSubmitting, setSubmitting] = useState(false)
   
+  useEffect(() => {
+    if (snapshot) {
+      setForm(snapshot.data())
+    }
+  }, [snapshot])
+
   const handleChange = (e) => {
     setForm({
       ...form, [e.target.name]:e.target.value
@@ -82,6 +92,10 @@ function Toko() {
       }
       setSubmitting(false)
     }
+  }
+
+  if (loading){
+    return <h1>Loading...</h1>
   }
 
   return  <div className={classes.pengaturanToko}>
