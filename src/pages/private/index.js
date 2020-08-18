@@ -76,8 +76,11 @@ export default function Dashboard() {
               <Route children="Home"/>
             </Switch>
           </Typography>
-          <IconButton color="inherit">
-            <SignOutIcon onClick={handleSignOut} />
+          <IconButton
+            color="inherit"
+            onClick={handleSignOut}
+          >
+            <SignOutIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
