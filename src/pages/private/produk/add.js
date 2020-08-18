@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // material-ui
 import Button from '@material-ui/core/Button'
@@ -10,17 +10,36 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
 function AddDialog() {
+
+  const [nama, setNama] = useState('')
+
+  const [error, setError] = useState('')
+
+  const handleSimpan = async e => {
+    try {
+      if (!nama) {
+        throw new Error('Nama Produk wajib diisi')
+      }
+    } catch (e) {
+      setError(e.message)
+    }
+  }
+
   return  <Dialog open={true}>
             <DialogTitle>Buat Produk Baru</DialogTitle>
-            <DialogContent>
+            <DialogContent dividers>
               <TextField
                 id="nama"
                 label="Nama Produk"
+                value={nama}
+                onChange={(e) => {
+                  setNama(e.target.value);
+                }}
               />
             </DialogContent>
             <DialogActions>
               <Button>Batal</Button>
-              <Button color="primary">Simpan</Button>
+              <Button onClick={handleSimpan} color="primary">Simpan</Button>
             </DialogActions>
           </Dialog>
 }
