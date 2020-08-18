@@ -15,6 +15,9 @@ const useStyles = makeStyles(theme => ({
   },
   iconRight: {
     marginLeft: theme.spacing(1)
+  },
+  iconLeft: {
+    marginRight: theme.spacing(1)
   }
 
 }))

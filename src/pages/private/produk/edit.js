@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import UploadIcon from '@material-ui/icons/CloudUpload'
+import SaveIcon from '@material-ui/icons/Save'
 
 import { useFirebase } from '../../../components/FirebaseProvider'
 import { useDocument } from 'react-firebase-hooks/firestore'
@@ -295,6 +296,7 @@ function EditProduk({ match }) {
                   color="primary"
                   variant="contained"
                 >
+                  <SaveIcon className={classes.iconLeft} />
                   Simpan
                 </Button>
               </Grid>
