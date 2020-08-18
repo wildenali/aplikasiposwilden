@@ -187,7 +187,20 @@ function EditProduk({ match }) {
                 </form>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Typography>Upload Gambar</Typography>
+                <div>
+                  <input
+                    type="file"
+                    id="upload-foto-produk"
+                    accept="image/jpeg,image/png"
+                  />
+                  <label htmlFor="upload-foto-produk">
+                    <Button
+                      variant="outlined"
+                    >
+                      Upload Foto Produk
+                    </Button>
+                  </label>
+                </div>
               </Grid>
               <Grid item xs={12}>
                 <Button
