@@ -15,6 +15,8 @@ import {useDocument} from 'react-firebase-hooks/firestore'
 
 import AppPageLoading from '../../../components/AppPageLoading'
 
+import { Prompt } from 'react-router-dom'
+
 function Toko() {
 
   const classes = useStyles();
@@ -38,6 +40,7 @@ function Toko() {
   })
   
   const [isSubmitting, setSubmitting] = useState(false)
+  const [isSomethingChange, setSomethingChange] = useState(false)
   
   useEffect(() => {
     if (snapshot) {
@@ -52,6 +55,8 @@ function Toko() {
     setError({
       [e.target.name]: ''
     })
+
+    setSomethingChange(true)
   }
 
 
@@ -168,6 +173,10 @@ function Toko() {
                 Simpan
               </Button>
             </form>
+            <Prompt
+              when={isSomethingChange}
+              message="Terdapat perubahan yg belum disimpan, apakah anda yakin ingin menginggalkan halaman ini?"
+            />
           </div>
 }
 
