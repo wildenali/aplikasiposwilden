@@ -95,6 +95,7 @@ function Toko() {
       try {
         // https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#set
         await tokoDoc.set(form, {merge: true});
+        setSubmitting(false)
         enqueueSnackbar('Data toko berhasil disimpan', {variant:'success'})
       } catch (e) {
         console.log(e.message)
