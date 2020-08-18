@@ -10,10 +10,13 @@ import { useFirebase } from '../../../components/FirebaseProvider'
 import { useDocument } from 'react-firebase-hooks/firestore'
 
 import AppPageLoading from '../../../components/AppPageLoading'
+import { useSnackbar } from 'notistack'
 
 function EditProduk({ match }) {
 
   const { firestore, user } = useFirebase()
+
+  const { enqueueSnackbar } = useSnackbar()
 
   const produkDoc = firestore.doc(`toko/${user.uid}/produk/${match.params.produkId}`)
 
@@ -84,8 +87,9 @@ function EditProduk({ match }) {
       setSubmitting(true)
       try {
         await produkDoc.set(form,{merge: true})
+        enqueueSnackbar('Data produk berhasil disimpan', {variant:'success'})
       } catch (e) {
-        
+        enqueueSnackbar(e.message, {variant: 'error'})
       }
       setSubmitting(false)
     }
