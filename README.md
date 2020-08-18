@@ -115,3 +115,12 @@ yg di pakai
 
 ## Install MaterialUI Icons
 `$ npm i --save @material-ui/icons`
+
+# firebase init firestore
+di terminal
+`$ firebase init firestore`
+- pilih project yg akan di pakai
+- enter enter aja sampai selesai
+
+## deploy firebase rules
+`$ firebase deploy --only firestore:rules`
