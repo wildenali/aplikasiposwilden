@@ -201,6 +201,7 @@ function EditProduk({ match }) {
                   <label htmlFor="upload-foto-produk">
                     <Button
                       variant="outlined"
+                      component="span"
                     >
                       Upload Foto Produk
                     </Button>
