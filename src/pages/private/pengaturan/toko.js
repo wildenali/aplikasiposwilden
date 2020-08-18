@@ -8,12 +8,14 @@ import useStyles from './styles/toko'
 // validator
 import isURL from 'validator/lib/isURL';
 import { useFirebase } from '../../../components/FirebaseProvider';
+import { useSnackbar } from 'notistack';
 
 function Toko() {
 
   const classes = useStyles();
   const { firestore, user } = useFirebase();
   const tokoDoc = firestore.doc(`toko/${user.uid}`);
+  const {enqueueSnackbar} = useSnackbar();
 
   const [form, setForm] = useState({
     nama: '',
@@ -73,8 +75,10 @@ function Toko() {
       try {
         // https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#set
         await tokoDoc.set(form, {merge: true});
+        enqueueSnackbar('Data toko berhasil disimpan', {variant:'success'})
       } catch (e) {
         console.log(e.message)
+        enqueueSnackbar(e.message, {variant:'error'})
       }
       setSubmitting(false)
     }
