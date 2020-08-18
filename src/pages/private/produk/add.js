@@ -10,7 +10,7 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
 function AddDialog() {
-  return  <Dialog>
+  return  <Dialog open={true}>
             <DialogTitle>Buat Produk Baru</DialogTitle>
             <DialogContent>
               <TextField
