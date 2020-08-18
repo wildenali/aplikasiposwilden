@@ -169,7 +169,7 @@ function Toko() {
                 className={classes.actionButton}
                 variant="contained"
                 color="primary"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !isSomethingChange}
               >
                 Simpan
               </Button>
