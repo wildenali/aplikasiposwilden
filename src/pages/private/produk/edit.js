@@ -205,7 +205,7 @@ function EditProduk({ match }) {
                 </form>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <div>
+                <div className={classes.uploadFotoProduk}>
                   <input
                     className={classes.hideInputFile}
                     type="file"
@@ -221,6 +221,11 @@ function EditProduk({ match }) {
                       Upload Foto Produk
                     </Button>
                   </label>
+                  {
+                    error.foto && <Typography variant="error">
+                                    {error.foto}
+                                  </Typography>
+                  }
                 </div>
               </Grid>
               <Grid item xs={12}>

@@ -4,6 +4,10 @@ const useStyles = makeStyles(theme => ({
 
   hideInputFile: {
     display: 'none'
+  },
+  uploadFotoProduk: {
+    textAlign: 'center',
+    padding: theme.spacing(3)
   }
 
 }))
