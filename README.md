@@ -124,3 +124,5 @@ di terminal
 
 ## deploy firebase rules
 `$ firebase deploy --only firestore:rules`
+
+## Security Rules untuk Firebase Cloud Storage
