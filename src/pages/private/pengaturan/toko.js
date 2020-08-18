@@ -13,6 +13,8 @@ import { useSnackbar } from 'notistack';
 // https://github.com/CSFrequency/react-firebase-hooks/tree/master/firestore#usedocument
 import {useDocument} from 'react-firebase-hooks/firestore'
 
+import AppPageLoading from '../../../components/AppPageLoading'
+
 function Toko() {
 
   const classes = useStyles();
@@ -95,7 +97,7 @@ function Toko() {
   }
 
   if (loading){
-    return <h1>Loading...</h1>
+    return <AppPageLoading />
   }
 
   return  <div className={classes.pengaturanToko}>
