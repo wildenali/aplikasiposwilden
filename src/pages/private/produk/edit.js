@@ -12,7 +12,11 @@ import { useDocument } from 'react-firebase-hooks/firestore'
 import AppPageLoading from '../../../components/AppPageLoading'
 import { useSnackbar } from 'notistack'
 
+import useStyles from './styles/edit'
+
 function EditProduk({ match }) {
+
+  const classes = useStyles()
 
   const { firestore, user } = useFirebase()
 
@@ -189,6 +193,7 @@ function EditProduk({ match }) {
               <Grid item xs={12} sm={6}>
                 <div>
                   <input
+                    className={classes.hideInputFile}
                     type="file"
                     id="upload-foto-produk"
                     accept="image/jpeg,image/png"
