@@ -110,6 +110,10 @@ function EditProduk({ match }) {
       setError(error => ({
         ...error, foto: `Tipe file tidak didukung: ${file.type}`
       }))
+    } else if (file.size >= 512000) {
+      setError(error => ({
+        ...error, foto: `Ukuran file terlalu besar, maksimal 500KB`
+      }))
     }
   }
 
