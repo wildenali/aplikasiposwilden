@@ -7,10 +7,13 @@ import useStyles from './styles/toko'
 
 // validator
 import isURL from 'validator/lib/isURL';
+import { useFirebase } from '../../../components/FirebaseProvider';
 
 function Toko() {
 
   const classes = useStyles();
+  const { firestore, user } = useFirebase();
+  const tokoDoc = firestore.doc(`toko/${user.uid}`);
 
   const [form, setForm] = useState({
     nama: '',
@@ -59,12 +62,21 @@ function Toko() {
     return newError
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const findErrors = validate();
 
     if (Object.values(findErrors).some(err => err !== '')) {
       setError(findErrors)
+    } else {
+      setSubmitting(true)
+      try {
+        // https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentReference#set
+        await tokoDoc.set(form, {merge: true});
+      } catch (e) {
+        console.log(e.message)
+      }
+      setSubmitting(false)
     }
   }
 
