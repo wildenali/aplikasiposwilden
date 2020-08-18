@@ -36,7 +36,7 @@ function Toko() {
 
 
   const validate = () => {
-    const newError = {...error};
+    const newError = { ...error };
 
     if (!form.nama) {
       newError.nama = 'Nama wajib diisi'
@@ -55,14 +55,21 @@ function Toko() {
     } else if (!isURL(form.website)) {
       newError.website = 'Website tidak valid'
     }
+
+    return newError
   }
 
   const handleSubmit = e => {
     e.preventDefault();
+    const findErrors = validate();
+
+    if (Object.values(findErrors).some(err => err !== '')) {
+      setError(findErrors)
+    }
   }
 
   return  <div className={classes.pengaturanToko}>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} noValidate>
               <TextField
                 id="nama"
                 name="nama"
