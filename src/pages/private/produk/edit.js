@@ -289,16 +289,18 @@ function EditProduk({ match }) {
                 </div>
               </Grid>
               <Grid item xs={12}>
-                <Button
-                  disabled={isSubmitting}
-                  form="produk-form"
-                  type="submit"
-                  color="primary"
-                  variant="contained"
-                >
-                  <SaveIcon className={classes.iconLeft} />
-                  Simpan
-                </Button>
+                <div className={classes.actionButton}>
+                  <Button
+                    disabled={isSubmitting}
+                    form="produk-form"
+                    type="submit"
+                    color="primary"
+                    variant="contained"
+                  >
+                    <SaveIcon className={classes.iconLeft} />
+                    Simpan
+                  </Button>
+                </div>
               </Grid>
             </Grid>
           </div>

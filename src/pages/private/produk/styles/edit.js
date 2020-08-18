@@ -18,6 +18,9 @@ const useStyles = makeStyles(theme => ({
   },
   iconLeft: {
     marginRight: theme.spacing(1)
+  },
+  actionButton: {
+    paddingTop: theme.spacing(2)
   }
 
 }))
