@@ -154,6 +154,14 @@ function Home() {
 
   }
 
+  const simpanTransaksi = async (e) => {
+    if (Object.keys(transaksi.items).length <= 0) {
+      enqueueSnackbar('Tidak ada transaksi untuk disimpan', {variant: 'error'})
+    }
+
+    
+  }  
+
   if (loadingProduk || loadingTransaksi) {
     return <AppPageLoading />
   }
@@ -176,6 +184,7 @@ function Home() {
                 <Button
                   variant="contained"
                   color="primary"
+                  onClick={simpanTransaksi}
                 >
                   Simpan Transaksi
                 </Button>
