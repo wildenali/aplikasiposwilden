@@ -31,6 +31,8 @@ import { useSnackbar } from 'notistack';
 
 import { currency } from '../../../utils/formatter'
 
+import format from 'date-fns/format'
+
 function Home() {
 
   const classes = useStyles()
@@ -42,16 +44,24 @@ function Home() {
 
   const produkCol = firestore.collection(`toko/${user.uid}/produk`)
 
+  const transaksiCol = firestore.collection(`toko/${user.uid}/transaksi`)
+
+  const todayDateString = format(new Date(), 'yyyy-mm-dd')
+
+  const [snaphotTransaksi, loadingTransaksi] = useCollection(transaksiCol.where('tanggal','==',todayDateString))
+
   const [snapshotProduk, loadingProduk] = useCollection(produkCol)
 
   const [produkItems, setProdukItems] = useState([])
   const [filterProduk, setFilterProduk] = useState('')
 
   const [transaksi, setTransaksi] = useState({
+    no: '',
     items: {
 
     },
-    total: 0
+    total: 0,
+    tanggal: todayDateString
   })
 
   useEffect(() => {

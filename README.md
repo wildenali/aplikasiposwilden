@@ -136,3 +136,6 @@ Setelah di deploy cek di console firebase google
 ## Numeral.js
 untuk membuat format currency<br/>
 `$ npm i --save numeral`
+
+## date-fnd library untuk Tanggal
+`$ npm i --save date-fns`
