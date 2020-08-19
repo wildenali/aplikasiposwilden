@@ -46,7 +46,7 @@ function Home() {
 
   const transaksiCol = firestore.collection(`toko/${user.uid}/transaksi`)
 
-  const todayDateString = format(new Date(), 'yyyy-mm-dd')
+  const todayDateString = format(new Date(), 'yyyy-MM-dd')
 
   const [snapshotTransaksi, loadingTransaksi] = useCollection(transaksiCol.where('tanggal','==',todayDateString))
 
@@ -55,14 +55,17 @@ function Home() {
   const [produkItems, setProdukItems] = useState([])
   const [filterProduk, setFilterProduk] = useState('')
 
-  const [transaksi, setTransaksi] = useState({
+  const initialTransaksi = {
     no: '',
     items: {
 
     },
     total: 0,
     tanggal: todayDateString
-  })
+  }
+  const [transaksi, setTransaksi] = useState(initialTransaksi)
+
+  const [isSubmitting, setSubmitting] = useState(false)
 
   useEffect(() => {
 
@@ -159,6 +162,7 @@ function Home() {
       enqueueSnackbar('Tidak ada transaksi untuk disimpan', {variant: 'error'})
     }
 
+    setSubmitting(true)
     try {
       await transaksiCol.add({
         ...transaksi,
@@ -166,9 +170,14 @@ function Home() {
       })
 
       enqueueSnackbar('Transaksi berhasil disimpan', {variant: 'success'})
+      setTransaksi(transaksi => ({
+        ...initialTransaksi,
+        no: transaksi.no
+      }))
     } catch (e) {
       enqueueSnackbar(e.message, {variant: 'error'})
     }
+    setSubmitting(false)
 
   }  
 
@@ -195,6 +204,7 @@ function Home() {
                   variant="contained"
                   color="primary"
                   onClick={simpanTransaksi}
+                  disabled={isSubmitting}
                 >
                   Simpan Transaksi
                 </Button>
@@ -218,6 +228,7 @@ function Home() {
                             <TableCell>{item.nama}</TableCell>
                             <TableCell>
                               <TextField
+                                disabled={isSubmitting}
                                 className={classes.inputJumlah}
                                 value={item.jumlah}
                                 type="number"
@@ -269,7 +280,7 @@ function Home() {
                       return <ListItem
                         key={produkDoc.id}
                         button
-                        disabled={!produkData.stok}
+                        disabled={!produkData.stok || isSubmitting}
                         onClick={addItem(produkDoc)}
                       >
                         {
