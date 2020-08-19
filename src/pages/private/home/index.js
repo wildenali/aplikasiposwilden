@@ -62,7 +62,7 @@ function Home() {
                         }
                         <ListItemText
                           primary={produkData.nama}
-                          secondary={`Stok: ${produkData.stok}`}
+                          secondary={`Stok: ${produkData.stok || 0}`}
                         />
                       </ListItem>
                     })
