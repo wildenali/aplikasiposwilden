@@ -60,6 +60,10 @@ function Home() {
                           :
                           <ListItemIcon><ImageIcon /></ListItemIcon>
                         }
+                        <ListItemText
+                          primary={produkData.nama}
+                          secondary={`Stok: ${produkData.stok}`}
+                        />
                       </ListItem>
                     })
                   }
