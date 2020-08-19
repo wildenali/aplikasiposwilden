@@ -93,7 +93,7 @@ function GridProduk() {
                       {
                         !produkData.foto && <div className={classes.fotoPlaceholder}><ImageIcon size="large" color="disabled" /></div>
                       }
-                      <CardContent>
+                      <CardContent className={classes.produkDetails}>
                         <Typography
                           variant="h5"
                           noWrap
@@ -109,7 +109,7 @@ function GridProduk() {
                           Stok: {produkData.stok}
                         </Typography>
                       </CardContent>
-                      <CardActions>
+                      <CardActions className={classes.produkActions}>
                         <IconButton component={Link} to={`/produk/edit/${produkDoc.id}`}>
                           <EditIcon />
                         </IconButton>

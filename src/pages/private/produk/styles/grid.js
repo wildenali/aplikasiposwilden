@@ -17,6 +17,12 @@ const useStyles = makeStyles(theme => ({
     width: 150,
     alignSelf: 'center',
     textAlign: 'center'
+  },
+  produkDetails: {
+    flex: '2 0 auto'
+  },
+  produkActions: {
+    flexDirection: 'column'
   }
 
 }))
