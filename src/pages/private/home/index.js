@@ -50,7 +50,8 @@ function Home() {
   const [transaksi, setTransaksi] = useState({
     items: {
 
-    }
+    },
+    total: 0
   })
 
   useEffect(() => {
@@ -78,16 +79,22 @@ function Home() {
       newItem.nama = produkData.nama
     }
 
+    const newItems = {
+      ...transaksi.items,
+      [produkDoc.id]: newItem
+    }
+
     if (newItem.jumlah > produkData.stok) {
       enqueueSnackbar('Jumlah melebihi stok produk', {variant:'error'})
     } else {
-      setTransaksi(transaksi => ({
+      setTransaksi({
         ...transaksi,
-        items: {
-          ...transaksi.items,
-          [produkDoc.id]: newItem
-        }
-      }))
+        items: newItems,
+        total: Object.keys(newItems).reduce((total,k) => {
+          const item = newItems[k]
+          return total + parseInt(item.subtotal)
+        },0)
+      })
     }
 
   }
@@ -123,6 +130,18 @@ function Home() {
                         )
                       })
                     }
+                    <TableRow>
+                      <TableCell colSpan={3}>
+                        <Typography variant="subtitle2">
+                          Total
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="h6">
+                          {currency(transaksi.total)}
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
                   </TableBody>
                 </Table>
               </Grid>
