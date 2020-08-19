@@ -21,7 +21,11 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 
 import AppPageLoading from '../../../components/AppPageLoading'
 
+import useStyles from './styles'
+
 function Home() {
+
+  const classes = useStyles()
 
   // Ini untuk bantu sementara, supaya bisa logout dari login session
   const { auth, firestore, user } = useFirebase();
@@ -55,6 +59,7 @@ function Home() {
             <Grid container>
               <Grid item xs={12}>
                 <List
+                  className={classes.produkList}
                   component="nav"
                   subheader={
                     <ListSubheader component="div">
