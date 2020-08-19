@@ -48,7 +48,7 @@ function Home() {
 
   const todayDateString = format(new Date(), 'yyyy-mm-dd')
 
-  const [snaphotTransaksi, loadingTransaksi] = useCollection(transaksiCol.where('tanggal','==',todayDateString))
+  const [snapshotTransaksi, loadingTransaksi] = useCollection(transaksiCol.where('tanggal','==',todayDateString))
 
   const [snapshotProduk, loadingProduk] = useCollection(produkCol)
 
@@ -63,6 +63,22 @@ function Home() {
     total: 0,
     tanggal: todayDateString
   })
+
+  useEffect(() => {
+
+    if (snapshotTransaksi) {
+      setTransaksi(transaksi => ({
+        ...transaksi,
+        no: `${transaksi.tanggal}/${snapshotTransaksi.docs.length+1}`
+      }))
+    } else {
+      setTransaksi(transaksi => ({
+        ...transaksi,
+        no: `${transaksi.tanggal}/1`
+      }))
+    }
+    
+  }, [snapshotTransaksi])
 
   useEffect(() => {
     if (snapshotProduk) {
@@ -138,7 +154,7 @@ function Home() {
 
   }
 
-  if (loadingProduk) {
+  if (loadingProduk || loadingTransaksi) {
     return <AppPageLoading />
   }
 
@@ -150,6 +166,10 @@ function Home() {
               <Grid item xs>
                 <TextField
                   label="No Transaksi"
+                  value={transaksi.no}
+                  InputProps={{
+                    readOnly: true
+                  }}
                 />
               </Grid>
               <Grid item>
