@@ -68,9 +68,10 @@ function Home() {
 
     if (newItem.jumlah) {
       newItem.jumlah = newItem.jumlah + 1
-      newItem.harga = produkData.harga * newItem.jumlah
+      newItem.subtotal = produkData.harga * newItem.jumlah
     } else {
       newItem.jumlah = 1
+      newItem.harga = produkData.harga
       newItem.subtotal = produkData.harga
       newItem.nama = produkData.nama
     }
@@ -106,6 +107,21 @@ function Home() {
                     <TableCell>Harga</TableCell>
                     <TableCell>Subtotal</TableCell>
                   </TableHead>
+                  <TableBody>
+                    {
+                      Object.keys(transaksi.items).map(k => {
+                        const item = transaksi.items[k]
+                        return (
+                          <TableRow key={k}>
+                            <TableCell>{item.nama}</TableCell>
+                            <TableCell>{item.jumlah}</TableCell>
+                            <TableCell>{item.harga}</TableCell>
+                            <TableCell>{item.subtotal}</TableCell>
+                          </TableRow>
+                        )
+                      })
+                    }
+                  </TableBody>
                 </Table>
               </Grid>
               <Grid item xs={12}>
