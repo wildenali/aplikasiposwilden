@@ -137,6 +137,21 @@ function Home() {
               Buat Transaksi Baru
             </Typography>
             <Grid container spacing={5}>
+              <Grid item xs>
+                <TextField
+                  label="No Transaksi"
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  variant="contained"
+                  color="primary"
+                >
+                  Simpan Transaksi
+                </Button>
+              </Grid>
+            </Grid>
+            <Grid container spacing={5}>
               <Grid item xs={12} md={8}>
                 <Table>
                   <TableHead>
