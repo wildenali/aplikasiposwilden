@@ -1,0 +1,8 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /toko/{uid}/produk/{filename} {
+      allow read, write: if request.auth.uid == uid;
+    }
+  }
+}

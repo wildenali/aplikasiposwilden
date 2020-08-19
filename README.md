@@ -124,3 +124,15 @@ di terminal
 
 ## deploy firebase rules
 `$ firebase deploy --only firestore:rules`
+
+## Security Rules untuk Firebase Cloud Storage
+`$ firebase init storage`
+<br />
+Deploy <br />
+
+`$ firebase deploy --only storage`
+Setelah di deploy cek di console firebase google
+
+## Numeral.js
+untuk membuat format currency<br/>
+`$ npm i --save numeral`
