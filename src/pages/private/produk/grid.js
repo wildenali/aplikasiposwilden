@@ -19,6 +19,9 @@ import { useFirebase } from '../../../components/FirebaseProvider'
 import AppPageLoading from '../../../components/AppPageLoading'
 import { useCollection } from 'react-firebase-hooks/firestore'
 
+// import currency
+import { currency } from '../../../utils/formatter'
+
 function GridProduk() {
 
   const classes = useStyles();
@@ -85,7 +88,7 @@ function GridProduk() {
                         <Typography
                           variant="subtitle1"
                         >
-                          Harga: {produkData.harga}
+                          Harga: {currency(produkData.harga)}
                         </Typography>
                         <Typography>
                           Stok: {produkData.stok}
