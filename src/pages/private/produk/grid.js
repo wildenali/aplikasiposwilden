@@ -10,6 +10,9 @@ import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
 import Typography from '@material-ui/core/Typography'
 import ImageIcon from '@material-ui/icons/Image'
+import IconButton from '@material-ui/core/IconButton'
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 // import styles
 import useStyles from './styles/grid'
@@ -94,6 +97,14 @@ function GridProduk() {
                           Stok: {produkData.stok}
                         </Typography>
                       </CardContent>
+                      <CardActions>
+                        <IconButton>
+                          <EditIcon />
+                        </IconButton>
+                        <IconButton>
+                          <DeleteIcon />
+                        </IconButton>
+                      </CardActions>
                     </Card>
                   </Grid>
                 })
