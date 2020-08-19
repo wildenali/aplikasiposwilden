@@ -29,6 +29,8 @@ import AppPageLoading from '../../../components/AppPageLoading'
 import useStyles from './styles'
 import { useSnackbar } from 'notistack';
 
+import { currency } from '../../../utils/formatter'
+
 function Home() {
 
   const classes = useStyles()
@@ -115,8 +117,8 @@ function Home() {
                           <TableRow key={k}>
                             <TableCell>{item.nama}</TableCell>
                             <TableCell>{item.jumlah}</TableCell>
-                            <TableCell>{item.harga}</TableCell>
-                            <TableCell>{item.subtotal}</TableCell>
+                            <TableCell>{currency(item.harga)}</TableCell>
+                            <TableCell>{currency(item.subtotal)}</TableCell>
                           </TableRow>
                         )
                       })
