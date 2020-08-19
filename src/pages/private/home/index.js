@@ -19,6 +19,8 @@ import ImageIcon from '@material-ui/icons/Image';
 import { useFirebase } from '../../../components/FirebaseProvider';
 import { useCollection } from 'react-firebase-hooks/firestore';
 
+import AppPageLoading from '../../../components/AppPageLoading'
+
 function Home() {
 
   // Ini untuk bantu sementara, supaya bisa logout dari login session
@@ -41,6 +43,10 @@ function Home() {
       }))
     }
   }, [snapshotProduk, filterProduk])
+
+  if (loadingProduk) {
+    return <AppPageLoading />
+  }
 
   return  <>
             <Typography variant="h5" component="h1">
