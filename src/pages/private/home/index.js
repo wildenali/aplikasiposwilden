@@ -136,8 +136,8 @@ function Home() {
             <Typography variant="h5" component="h1">
               Buat Transaksi Baru
             </Typography>
-            <Grid container>
-              <Grid item xs={12}>
+            <Grid container spacing={5}>
+              <Grid item xs={12} md={8}>
                 <Table>
                   <TableHead>
                     <TableCell>Item</TableCell>
@@ -181,7 +181,7 @@ function Home() {
                   </TableBody>
                 </Table>
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} md={4}>
                 <List
                   className={classes.produkList}
                   component="nav"
