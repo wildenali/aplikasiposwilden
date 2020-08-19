@@ -123,7 +123,13 @@ function Home() {
                         return (
                           <TableRow key={k}>
                             <TableCell>{item.nama}</TableCell>
-                            <TableCell>{item.jumlah}</TableCell>
+                            <TableCell>
+                              <TextField
+                                className={classes.inputJumlah}
+                                value={item.jumlah}
+                                type="number"
+                              />
+                            </TableCell>
                             <TableCell>{currency(item.harga)}</TableCell>
                             <TableCell>{currency(item.subtotal)}</TableCell>
                           </TableRow>
