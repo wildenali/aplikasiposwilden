@@ -82,6 +82,14 @@ function GridProduk() {
                         >
                           {produkData.nama}
                         </Typography>
+                        <Typography
+                          variant="subtitle1"
+                        >
+                          Harga: {produkData.harga}
+                        </Typography>
+                        <Typography>
+                          Stok: {produkData.stok}
+                        </Typography>
                       </CardContent>
                     </Card>
                   </Grid>
