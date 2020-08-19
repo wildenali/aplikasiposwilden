@@ -64,6 +64,7 @@ function Home() {
                   subheader={
                     <ListSubheader component="div">
                       <TextField
+                        autoFocus
                         label="Cari Produk"
                         fullWidth
                         margin="normal"
