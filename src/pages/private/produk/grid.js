@@ -31,7 +31,7 @@ function GridProduk() {
 
   const classes = useStyles();
 
-  const {firestore, user} = useFirebase()
+  const {firestore, storage, user} = useFirebase()
 
   const produkCol = firestore.collection(`toko/${user.uid}/produk`)
 
@@ -49,6 +49,16 @@ function GridProduk() {
 
   if (loading) {
     return <AppPageLoading />
+  }
+
+  const handleDelete = produkDoc => async e => {
+    if (window.confirm('Anda yakin ingin menghapus produk ini?')) {
+      await produkDoc.ref.delete()
+      const fotoURL = produkDoc.data().foto
+      if (fotoURL) {
+        await storage.refFromURL(fotoURL).delete()
+      }
+    }
   }
 
   return  <>
@@ -103,7 +113,7 @@ function GridProduk() {
                         <IconButton component={Link} to={`/produk/edit/${produkDoc.id}`}>
                           <EditIcon />
                         </IconButton>
-                        <IconButton>
+                        <IconButton onClick={handleDelete(produkDoc)}>
                           <DeleteIcon />
                         </IconButton>
                       </CardActions>
