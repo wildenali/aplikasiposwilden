@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // material-ui
 import Fab from '@material-ui/core/Fab'
@@ -27,15 +27,60 @@ function GridProduk() {
   const produkCol = firestore.collection(`toko/${user.uid}/produk`)
 
   const [snapshot, loading] = useCollection(produkCol)
+  
+  const [produkItems, setProdukItems] = useState([])
 
   const [openAddDialog, setOpenAddDialog] = useState(false)
+
+  useEffect(() => {
+    if (snapshot) {
+      setProdukItems(snapshot.docs)
+    }
+  }, [snapshot])
 
   if (loading) {
     return <AppPageLoading />
   }
 
   return  <>
-            <h1>Halaman GridProduk</h1>
+            <Typography
+              variant="h5"
+              component="h1"
+            >
+              Daftar Produk
+            </Typography>
+            {
+              produkItems.length <= 0 && <Typography>Belum ada data produk</Typography>
+            }
+            <Grid
+              container
+              spacing={5}
+            >
+              {
+                produkItems.map((produkDoc) => {
+                  const produkData = produkDoc.data()
+                  return <Grid
+                    key={produkDoc.id}
+                    item={true}
+                    xs={12}
+                    sm={12}
+                    md={6}
+                    lg={4}
+                  >
+                    <Card>
+                      <CardContent>
+                        <Typography
+                          variant="h5"
+                          noWrap
+                        >
+                          {produkData.nama}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                })
+              }
+            </Grid>
             <Fab
               className={classes.fab}
               color="primary"
