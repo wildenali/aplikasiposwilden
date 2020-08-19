@@ -11,6 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
+import TextField from '@material-ui/core/TextField';
 
 // icons
 import ImageIcon from '@material-ui/icons/Image';
@@ -41,7 +42,18 @@ function Home() {
             </Typography>
             <Grid container>
               <Grid item xs={12}>
-                <List>
+                <List
+                  component="nav"
+                  subheader={
+                    <ListSubheader component="div">
+                      <TextField
+                        label="Cari Produk"
+                        fullWidth
+                        margin="normal"
+                      />
+                    </ListSubheader>
+                  }
+                >
                   {
                     produkItems.map((produkDoc) => {
                       const produkData = produkDoc.data()
