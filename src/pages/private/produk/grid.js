@@ -9,6 +9,7 @@ import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
 import Typography from '@material-ui/core/Typography'
+import ImageIcon from '@material-ui/icons/Image'
 
 // import styles
 import useStyles from './styles/grid'
@@ -67,7 +68,13 @@ function GridProduk() {
                     md={6}
                     lg={4}
                   >
-                    <Card>
+                    <Card className={classes.card}>
+                      {
+                        produkData.foto && <CardMedia className={classes.foto} image={produkData.foto} title={produkData.nama} />
+                      }
+                      {
+                        !produkData.foto && <div className={classes.fotoPlaceholder}><ImageIcon size="large" color="disabled" /></div>
+                      }
                       <CardContent>
                         <Typography
                           variant="h5"
