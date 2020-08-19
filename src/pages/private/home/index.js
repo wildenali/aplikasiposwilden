@@ -99,6 +99,35 @@ function Home() {
 
   }
   
+  const handleChangeJumlah = k => e => {
+    let newItem = {...transaksi.items[k]}
+
+    newItem.jumlah = parseInt(e.target.value)
+    newItem.subtotal = newItem.harga * newItem.jumlah
+
+    const newItems = {
+      ...transaksi.items,
+      [k]: newItem
+    }
+
+    const produkDoc = produkItems.find(item => item.id === k)
+    const produkData = produkDoc.data()
+
+    if (newItem.jumlah > produkData.stok) {
+      enqueueSnackbar('Jumlah melebihi stok produk', {variant:'error'})
+    } else {
+      setTransaksi({
+        ...transaksi,
+        items: newItems,
+        total: Object.keys(newItems).reduce((total,k) => {
+          const item = newItems[k]
+          return total + parseInt(item.subtotal)
+        },0)
+      })
+    }
+
+  }
+
   if (loadingProduk) {
     return <AppPageLoading />
   }
@@ -128,6 +157,7 @@ function Home() {
                                 className={classes.inputJumlah}
                                 value={item.jumlah}
                                 type="number"
+                                onChange={handleChangeJumlah(k)}
                               />
                             </TableCell>
                             <TableCell>{currency(item.harga)}</TableCell>
