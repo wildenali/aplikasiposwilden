@@ -139,3 +139,7 @@ untuk membuat format currency<br/>
 
 ## date-fnd library untuk Tanggal
 `$ npm i --save date-fns`
+
+### Disini tambahin rules di firestore.rules
+kemudian deploy dengan cara<br/>
+`$ firebase deploy --only firestore:rules`

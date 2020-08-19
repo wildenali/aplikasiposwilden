@@ -159,7 +159,17 @@ function Home() {
       enqueueSnackbar('Tidak ada transaksi untuk disimpan', {variant: 'error'})
     }
 
-    
+    try {
+      await transaksiCol.add({
+        ...transaksi,
+        timestamp: Date.now()
+      })
+
+      enqueueSnackbar('Transaksi berhasil disimpan', {variant: 'success'})
+    } catch (e) {
+      enqueueSnackbar(e.message, {variant: 'error'})
+    }
+
   }  
 
   if (loadingProduk || loadingTransaksi) {
