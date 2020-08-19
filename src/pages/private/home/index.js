@@ -29,12 +29,18 @@ function Home() {
   const [snapshotProduk, loadingProduk] = useCollection(produkCol)
 
   const [produkItems, setProdukItems] = useState([])
+  const [filterProduk, setFilterProduk] = useState('')
 
   useEffect(() => {
     if (snapshotProduk) {
-      setProdukItems(snapshotProduk.docs)
+      setProdukItems(snapshotProduk.docs.filter((produkDoc) => {
+        if (filterProduk) {
+          return produkDoc.data().nama.toLowerCase().includes(filterProduk.toLowerCase())
+        }
+        return true // ini artinya semua produk akan ditampilkan
+      }))
     }
-  }, [snapshotProduk])
+  }, [snapshotProduk, filterProduk])
 
   return  <>
             <Typography variant="h5" component="h1">
@@ -50,6 +56,9 @@ function Home() {
                         label="Cari Produk"
                         fullWidth
                         margin="normal"
+                        onChange={e => {
+                          setFilterProduk(e.target.value)
+                        }}
                       />
                     </ListSubheader>
                   }
