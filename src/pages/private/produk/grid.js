@@ -25,6 +25,8 @@ import { useCollection } from 'react-firebase-hooks/firestore'
 // import currency
 import { currency } from '../../../utils/formatter'
 
+import { Link } from 'react-router-dom'
+
 function GridProduk() {
 
   const classes = useStyles();
@@ -98,7 +100,7 @@ function GridProduk() {
                         </Typography>
                       </CardContent>
                       <CardActions>
-                        <IconButton>
+                        <IconButton component={Link} to={`/produk/edit/${produkDoc.id}`}>
                           <EditIcon />
                         </IconButton>
                         <IconButton>
