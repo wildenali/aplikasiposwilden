@@ -12,6 +12,11 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import TextField from '@material-ui/core/TextField';
+import Table from '@material-ui/core/Table';
+import TableRow from '@material-ui/core/TableRow';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
 
 // icons
 import ImageIcon from '@material-ui/icons/Image';
@@ -22,10 +27,13 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 import AppPageLoading from '../../../components/AppPageLoading'
 
 import useStyles from './styles'
+import { useSnackbar } from 'notistack';
 
 function Home() {
 
   const classes = useStyles()
+  
+  const {enqueueSnackbar} = useSnackbar()
 
   // Ini untuk bantu sementara, supaya bisa logout dari login session
   const { auth, firestore, user } = useFirebase();
@@ -36,6 +44,12 @@ function Home() {
 
   const [produkItems, setProdukItems] = useState([])
   const [filterProduk, setFilterProduk] = useState('')
+
+  const [transaksi, setTransaksi] = useState({
+    items: {
+
+    }
+  })
 
   useEffect(() => {
     if (snapshotProduk) {
@@ -48,6 +62,33 @@ function Home() {
     }
   }, [snapshotProduk, filterProduk])
 
+  const addItem = produkDoc => e => {
+    let newItem = { ...transaksi.items[produkDoc.id] }
+    const produkData = produkDoc.data()
+
+    if (newItem.jumlah) {
+      newItem.jumlah = newItem.jumlah + 1
+      newItem.harga = produkData.harga * newItem.jumlah
+    } else {
+      newItem.jumlah = 1
+      newItem.subtotal = produkData.harga
+      newItem.nama = produkData.nama
+    }
+
+    if (newItem.jumlah > produkData.stok) {
+      enqueueSnackbar('Jumlah melebihi stok produk', {variant:'error'})
+    } else {
+      setTransaksi(transaksi => ({
+        ...transaksi,
+        items: {
+          ...transaksi.items,
+          [produkDoc.id]: newItem
+        }
+      }))
+    }
+
+  }
+  
   if (loadingProduk) {
     return <AppPageLoading />
   }
@@ -57,6 +98,16 @@ function Home() {
               Buat Transaksi Baru
             </Typography>
             <Grid container>
+              <Grid item xs={12}>
+                <Table>
+                  <TableHead>
+                    <TableCell>Item</TableCell>
+                    <TableCell>Jumlah</TableCell>
+                    <TableCell>Harga</TableCell>
+                    <TableCell>Subtotal</TableCell>
+                  </TableHead>
+                </Table>
+              </Grid>
               <Grid item xs={12}>
                 <List
                   className={classes.produkList}
@@ -81,6 +132,8 @@ function Home() {
                       return <ListItem
                         key={produkDoc.id}
                         button
+                        disabled={!produkData.stok}
+                        onClick={addItem(produkDoc)}
                       >
                         {
                           produkData.foto ? 
