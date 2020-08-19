@@ -65,6 +65,7 @@ function GridProduk() {
             <Typography
               variant="h5"
               component="h1"
+              paragraph
             >
               Daftar Produk
             </Typography>
