@@ -161,6 +161,7 @@ function Home() {
   const simpanTransaksi = async (e) => {
     if (Object.keys(transaksi.items).length <= 0) {
       enqueueSnackbar('Tidak ada transaksi untuk disimpan', {variant: 'error'})
+      return false
     }
 
     setSubmitting(true)
