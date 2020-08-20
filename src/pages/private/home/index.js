@@ -169,6 +169,30 @@ function Home() {
         timestamp: Date.now()
       })
 
+      // update stok produk menggunakan transactions
+      // https://firebase.google.com/docs/firestore/manage-data/transactions
+      await firestore.runTransaction(transaction => {
+        const produkIDs = Object.keys(transaksi.items)
+
+        return Promise.all(produkIDs.map(produkId => {
+          const produkRef = firestore.doc(`toko/${user.uid}/produk/${produkId}`)
+
+          return transaction.get(produkRef).then((produkDoc) => {
+            if (!produkDoc.exists) {
+              throw Error('Produk tidak ada')
+            }
+            let newStok = parseInt(produkDoc.data().stok) - parseInt(transaksi.items[produkId].jumlah)
+
+            if (newStok < 0) {
+              newStok = 0
+            }
+
+            transaction.update(produkRef, {stok: newStok})
+          })
+        }))
+      })
+
+
       enqueueSnackbar('Transaksi berhasil disimpan', {variant: 'success'})
       setTransaksi(transaksi => ({
         ...initialTransaksi,
