@@ -20,6 +20,7 @@ import TableCell from '@material-ui/core/TableCell';
 
 // icons
 import ImageIcon from '@material-ui/icons/Image';
+import SaveIcon from '@material-ui/icons/Save';
 
 import { useFirebase } from '../../../components/FirebaseProvider';
 import { useCollection } from 'react-firebase-hooks/firestore';
@@ -230,6 +231,7 @@ function Home() {
                   onClick={simpanTransaksi}
                   disabled={isSubmitting}
                 >
+                  <SaveIcon className={classes.iconLeft} />
                   Simpan Transaksi
                 </Button>
               </Grid>
