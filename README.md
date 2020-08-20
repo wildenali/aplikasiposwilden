@@ -136,3 +136,10 @@ Setelah di deploy cek di console firebase google
 ## Numeral.js
 untuk membuat format currency<br/>
 `$ npm i --save numeral`
+
+## date-fnd library untuk Tanggal
+`$ npm i --save date-fns`
+
+### Disini tambahin rules di firestore.rules
+kemudian deploy dengan cara<br/>
+`$ firebase deploy --only firestore:rules`
