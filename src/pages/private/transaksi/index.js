@@ -13,6 +13,8 @@ import { useCollection } from 'react-firebase-hooks/firestore'
 
 import { currency } from '../../../utils/formatter'
 
+import format from 'date-fns/format'
+
 function Transaksi() {
 
   const { firestore, user} = useFirebase()
@@ -52,7 +54,12 @@ function Transaksi() {
                 <Typography variant="h5" noWrap>
                   {transaksiData.no}
                 </Typography>
-                <Typography>Total: {currency(transaksiData.total)}</Typography>
+                <Typography>
+                  Total: {currency(transaksiData.total)}
+                </Typography>
+                <Typography>
+                  Tanggal: {format(new Date(transaksiData.timestamp), 'dd-MM-yyyy HH:mm')}
+                </Typography>
               </CardContent>
             </Card>
           </Grid>
