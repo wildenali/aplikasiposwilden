@@ -23,7 +23,7 @@ function DetailsDialog({ open, handleClose, transaksi }) {
     onClose={handleClose}
   >
     <DialogTitle>Transaksi No: {transaksi.no}</DialogTitle>
-    <DialogContent>
+    <DialogContent dividers>
       <Table>
         <TableHead>
           <TableCell>Item</TableCell>
@@ -60,6 +60,9 @@ function DetailsDialog({ open, handleClose, transaksi }) {
         </TableBody>
       </Table>
     </DialogContent>
+    <DialogActions>
+      <Button onClick={handleClose} color="primary">Close</Button>
+    </DialogActions>
   </Dialog>
 }
 
