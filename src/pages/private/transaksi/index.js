@@ -22,7 +22,11 @@ import format from 'date-fns/format'
 
 import AppPageLoading from '../../../components/AppPageLoading'
 
+import useStyles from './styles'
+
 function Transaksi() {
+
+  const classes = useStyles()
 
   const { firestore, user} = useFirebase()
 
@@ -60,8 +64,8 @@ function Transaksi() {
         transaksiItems.map(transaksiDoc => {
           const transaksiData = transaksiDoc.data()
           return <Grid key={transaksiDoc.id} item xs={12} sm={12} md={6} lg={4}>
-            <Card>
-              <CardContent>
+            <Card className={classes.card}>
+              <CardContent className={classes.transaksiSummary}>
                 <Typography variant="h5" noWrap>
                   No: {transaksiData.no}
                 </Typography>
@@ -72,7 +76,7 @@ function Transaksi() {
                   Tanggal: {format(new Date(transaksiData.timestamp), 'dd-MM-yyyy HH:mm')}
                 </Typography>
               </CardContent>
-              <CardActions>
+              <CardActions className={classes.transaksiActions}>
                 <IconButton><ViewIcon /></IconButton>
                 <IconButton><DeleteIcon /></IconButton>
               </CardActions>
