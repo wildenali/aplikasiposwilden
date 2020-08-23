@@ -15,6 +15,8 @@ import { currency } from '../../../utils/formatter'
 
 import format from 'date-fns/format'
 
+import AppPageLoading from '../../../components/AppPageLoading'
+
 function Transaksi() {
 
   const { firestore, user} = useFirebase()
@@ -32,6 +34,10 @@ function Transaksi() {
     
   }, [snapshot])
 
+  if (loading) {
+    return <AppPageLoading />
+  }
+  
   return <>
     <Typography
       component="h1"
