@@ -36,7 +36,7 @@ function Transaksi() {
     <Typography
       component="h1"
       variant="h5"
-      paragraf
+      paragraph
     >
       Daftar Transaksi
     </Typography>
@@ -44,11 +44,11 @@ function Transaksi() {
       transaksiItems.length <= 0 && <Typography>Belum ada transaksi</Typography>
     }
 
-    <Grid container>
+    <Grid container spacing={5}>
       {
         transaksiItems.map(transaksiDoc => {
           const transaksiData = transaksiDoc.data()
-          return <Grid>
+          return <Grid key={transaksiDoc.id} item xs={12}>
             <Card>
               <CardContent>
                 <Typography variant="h5" noWrap>
