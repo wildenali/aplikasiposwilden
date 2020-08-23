@@ -48,11 +48,11 @@ function Transaksi() {
       {
         transaksiItems.map(transaksiDoc => {
           const transaksiData = transaksiDoc.data()
-          return <Grid key={transaksiDoc.id} item xs={12}>
+          return <Grid key={transaksiDoc.id} item xs={12} sm={12} md={6} lg={4}>
             <Card>
               <CardContent>
                 <Typography variant="h5" noWrap>
-                  {transaksiData.no}
+                  No: {transaksiData.no}
                 </Typography>
                 <Typography>
                   Total: {currency(transaksiData.total)}
