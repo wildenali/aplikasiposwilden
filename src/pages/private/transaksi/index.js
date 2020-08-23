@@ -7,6 +7,11 @@ import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
 import Grid from '@material-ui/core/Grid'
 
+// icons
+import IconButton from '@material-ui/core/IconButton'
+import DeleteIcon from '@material-ui/icons/Delete'
+import ViewIcon from '@material-ui/icons/Visibility'
+
 import { useFirebase } from '../../../components/FirebaseProvider'
 
 import { useCollection } from 'react-firebase-hooks/firestore'
@@ -67,6 +72,10 @@ function Transaksi() {
                   Tanggal: {format(new Date(transaksiData.timestamp), 'dd-MM-yyyy HH:mm')}
                 </Typography>
               </CardContent>
+              <CardActions>
+                <IconButton><ViewIcon /></IconButton>
+                <IconButton><DeleteIcon /></IconButton>
+              </CardActions>
             </Card>
           </Grid>
         })
