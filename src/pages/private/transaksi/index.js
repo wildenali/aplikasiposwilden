@@ -24,6 +24,8 @@ import AppPageLoading from '../../../components/AppPageLoading'
 
 import useStyles from './styles'
 
+import DetailsDialog from './details'
+
 function Transaksi() {
 
   const classes = useStyles()
@@ -35,6 +37,11 @@ function Transaksi() {
   const [snapshot, loading] = useCollection(transaksiCol)
 
   const [transaksiItems, setTransaksiItems] = useState([])
+
+  const [details, setDetails] = useState({
+    open: false,
+    transaksi: {}
+  })
 
   useEffect(() => {
     if (snapshot) {
@@ -51,6 +58,20 @@ function Transaksi() {
 
   if (loading) {
     return <AppPageLoading />
+  }
+
+  const handleCloseDetails = (e) => {
+    setDetails({
+      open: false,
+      transaksi: {}
+    })
+  }
+  
+  const handleOpenDetails = transaksiDoc => e => {
+    setDetails({
+      open: true,
+      transaksi: transaksiDoc.data()
+    })
   }
   
   return <>
@@ -83,7 +104,7 @@ function Transaksi() {
                 </Typography>
               </CardContent>
               <CardActions className={classes.transaksiActions}>
-                <IconButton><ViewIcon /></IconButton>
+                <IconButton onClick={handleOpenDetails(transaksiDoc)}><ViewIcon /></IconButton>
                 <IconButton onClick={handleDelete(transaksiDoc)}><DeleteIcon /></IconButton>
               </CardActions>
             </Card>
@@ -91,6 +112,11 @@ function Transaksi() {
         })
       }
     </Grid>
+    <DetailsDialog
+      open={details.open}
+      handleClose={handleCloseDetails}
+      transaksi={details.transaksi}
+    />
   </>
 }
 
