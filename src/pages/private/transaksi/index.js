@@ -43,6 +43,12 @@ function Transaksi() {
     
   }, [snapshot])
 
+  const handleDelete = transaksiDoc => async e => {
+    if (window.confirm('Apakah anda yakin ingin menghapus transaksi ini?')) {
+      await transaksiDoc.ref.delete()
+    }
+  }
+
   if (loading) {
     return <AppPageLoading />
   }
@@ -78,7 +84,7 @@ function Transaksi() {
               </CardContent>
               <CardActions className={classes.transaksiActions}>
                 <IconButton><ViewIcon /></IconButton>
-                <IconButton><DeleteIcon /></IconButton>
+                <IconButton onClick={handleDelete(transaksiDoc)}><DeleteIcon /></IconButton>
               </CardActions>
             </Card>
           </Grid>
