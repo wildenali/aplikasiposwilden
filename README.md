@@ -145,12 +145,13 @@ kemudian deploy dengan cara<br/>
 `$ firebase deploy --only firestore:rules`
 
 # Cara Deploy Web App ke Firebase
-1. `$ npm install -g firebase-tools`
-2. `$ firebase login`
-3. `$ firebase init`
-4. Are you ready to procees? Jawab Y
-5. Pilih Hosting: Configure and deploy Firebase Hosting sites
-6. What do you want to use as your public directory? (public) - Enter aja
-7. Configure as a single-page app (rewrite all urls to /index.html)? (y/N) , jawab YES aja
-8. Overwrite index.html? jawab No, karena mau pake index.html yg di build
-9. `$ firebase deploy`
+1. `$ npm run build`
+2. `$ npm install -g firebase-tools`
+3. `$ firebase login`
+4. `$ firebase init`
+5. Are you ready to procees? Jawab Y
+6. Pilih Hosting: Configure and deploy Firebase Hosting sites
+7. What do you want to use as your public directory? (public) - Enter aja
+8. Configure as a single-page app (rewrite all urls to /index.html)? (y/N) , jawab YES aja
+9. Overwrite index.html? jawab No, karena mau pake index.html yg di build
+10. `$ firebase deploy`
