@@ -189,6 +189,11 @@ function Login(props) {
               </form>
 
             </Paper>
+            <Typography className={classes.title}>
+              Gunakan Email dan Password dibawah ini<br/>untuk uji coba<br/><br/>
+              Email:      wildentest@gmail.com<br/>
+              Password:   123456
+            </Typography>
           </Container>
 }
 
