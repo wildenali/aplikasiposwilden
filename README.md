@@ -151,7 +151,7 @@ kemudian deploy dengan cara<br/>
 4. `$ firebase init`
 5. Are you ready to procees? Jawab Y
 6. Pilih Hosting: Configure and deploy Firebase Hosting sites
-7. What do you want to use as your public directory? (public) - Enter aja
+7. What do you want to use as your public directory? (awalnya public ganti jadi build)
 8. Configure as a single-page app (rewrite all urls to /index.html)? (y/N) , jawab YES aja
 9. Overwrite index.html? jawab No, karena mau pake index.html yg di build
 10. `$ firebase deploy`
