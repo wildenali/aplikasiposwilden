@@ -143,3 +143,14 @@ untuk membuat format currency<br/>
 ### Disini tambahin rules di firestore.rules
 kemudian deploy dengan cara<br/>
 `$ firebase deploy --only firestore:rules`
+
+# Cara Deploy Web App ke Firebase
+1. `$ npm install -g firebase-tools`
+2. `$ firebase login`
+3. `$ firebase init`
+4. Are you ready to procees? Jawab Y
+5. Pilih Hosting: Configure and deploy Firebase Hosting sites
+6. What do you want to use as your public directory? (public) - Enter aja
+7. Configure as a single-page app (rewrite all urls to /index.html)? (y/N) , jawab YES aja
+8. Overwrite index.html? jawab No, karena mau pake index.html yg di build
+9. `$ firebase deploy`
